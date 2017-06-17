@@ -6,9 +6,9 @@ import { HttpModule, JsonpModule }              from '@angular/http';
 
 //--------Components---------//
 import { LandingPageComponent }                 from './landingPage/landingPage.component';
-import { RegisterComponent }                    from './register/register.component';
-import { LoginComponent }                       from './login/login.component';
-import { UsersListComponent }                       from './usersList/usersList.component';
+import { RegisterComponent }                    from './auth/register/register.component';
+import { LoginComponent }                       from './auth/login/login.component';
+import { UsersListComponent }                   from './usersList/usersList.component';
 
 //--------Services---------//
 import { AuthService }                          from './services/auth.service';
