@@ -1,5 +1,7 @@
 import { Injectable }                               from '@angular/core';
 import { Http, Headers, RequestOptions, Response }  from '@angular/http';
+// import { CanActivate, Router, ActivatedRouteSnapshot,
+//   RouterStateSnapshot}                              from '@angular/router';
 import { User }                                     from '../interfaces';
 import { CommonFunctions }                          from './commonFunctions.service';
 import { Observable }                               from 'rxjs/Observable';
@@ -7,9 +9,32 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
 @Injectable()
-export class AuthService {
+export class AuthService
+{
+  
+
   constructor(private http: Http,
               private common: CommonFunctions) {}
+
+
+  // canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+  //   console.log(state)
+  //   console.log("route ", route)
+  //   if(this.opusUser && this.opusUser.split('.').length === 3){
+  //   this.getUser()
+  //     .subscribe(
+  //       res => {
+  //         if (res){
+  //           this.router.navigate(['/usersList'])
+  //           return true
+  //           //localStorage.setItem('id', res.id.toString());
+  //           //this.router.navigate(['/usersList'])
+  //         }
+  //       }
+  //     )
+  //   }
+  //   return false
+  // }            
 
   getUser(): Observable<string> {
     const url = '/api/me'
@@ -39,7 +64,7 @@ export class AuthService {
   logout(): boolean 
   {
     localStorage.removeItem('id')
-    document.cookie = 'TellTova_User=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;'
+    document.cookie = 'Opus_User=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;'
     return true;
   }
 
