@@ -8,14 +8,14 @@ const moment = require('moment')
 const config = require('./config.json')
 const string = config.connectionString
 
-//const db = massive.connectSync({connectionString: string})
+const db = massive.connectSync({connectionString: string})
 
 const corsOptions = {
   origin: 'http://localhost:6060'
 }
 
 const app = module.exports = express();
-//app.set('db', db);
+app.set('db', db);
 
 app.use(bodyParser.json());
 app.use(cors(corsOptions));
