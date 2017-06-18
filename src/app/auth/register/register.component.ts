@@ -1,4 +1,4 @@
-import { Component, OnInit }    from '@angular/core';
+import { Component }    from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthService} from '../../services/auth.service';
@@ -10,7 +10,7 @@ import { AuthService} from '../../services/auth.service';
   styleUrls: ['./register.component.css']
 })
 
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
   model: any = {};
   loading: boolean = false;
   loginForm: boolean = true;
@@ -21,16 +21,6 @@ export class RegisterComponent implements OnInit {
       private router: Router,
       private auth: AuthService) { }
 
-  ngOnInit() {
-    if(this.opusUser && this.opusUser.split('.').length === 3){
-        this.auth.getUser()
-        .subscribe(
-            res => {
-                if (res) this.router.navigate(['/usersList'])
-            }
-        )
-    }
-  }
 
   switchForms() {
     this.loginForm = false;

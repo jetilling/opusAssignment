@@ -1,4 +1,4 @@
-
+<section class="main">
   <div class="register">
       <h2 class="register-title">Register 'n Stuff</h2>
       <form class="register-form" name="form" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate>
@@ -23,7 +23,12 @@
               <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
           </div>
           <div class="register-button">
-              <button [disabled]="loading" class="btn btn-primary">Sign up</button>
+              <button [disabled]="loading" class="btn btn-primary">Register</button>
           </div>
       </form>
   </div>
+
+  <div>
+      <a routerLink='/login' routerLinkActive="active">Already have an account? Login here!</a>
+  </div>
+</section>
