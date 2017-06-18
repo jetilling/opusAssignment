@@ -9,13 +9,14 @@ import { UsersService }         from '../services/users.service';
 @Component({
   moduleId: module.id,
   selector: 'users-list',
-  templateUrl: './usersList.component.html',
-  styleUrls: ['./usersList.component.css']
+  templateUrl: './userDashboard.component.html',
+  styleUrls: ['./userDashboard.component.css']
 })
 
-export class UsersListComponent implements OnInit
+export class UserDashboardComponent implements OnInit
 {
-
+  firstName: string;
+  userList: boolean = true;
   opusUser: string = document.cookie.split("Opus_User=")[1];
 
   constructor(
@@ -23,20 +24,24 @@ export class UsersListComponent implements OnInit
       private auth: AuthService,
       private usersService: UsersService) { }
 
-
   ngOnInit() {
     if(this.opusUser && this.opusUser.split('.').length === 3){
     this.auth.getUser()
       .subscribe(
         res => {
-          if (!res){
-            this.router.navigate(['/login'])
-          }
+          if (!res) this.router.navigate(['/login'])
+          else this.usersService.getUsers()
         }
       )
     }
     else this.router.navigate(['/login'])
   }
+
+  // get userName(): string {
+  //   return this.
+  // }
+
+//--------Methods----------//
 
 /**
   * Logs user out

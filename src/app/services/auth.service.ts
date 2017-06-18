@@ -1,7 +1,5 @@
 import { Injectable }                               from '@angular/core';
 import { Http, Headers, RequestOptions, Response }  from '@angular/http';
-// import { CanActivate, Router, ActivatedRouteSnapshot,
-//   RouterStateSnapshot}                              from '@angular/router';
 import { User }                                     from '../interfaces';
 import { CommonFunctions }                          from './commonFunctions.service';
 import { Observable }                               from 'rxjs/Observable';
@@ -12,33 +10,12 @@ import 'rxjs/add/operator/map';
 export class AuthService
 {
   
-
   constructor(private http: Http,
-              private common: CommonFunctions) {}
-
-
-  // canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-  //   console.log(state)
-  //   console.log("route ", route)
-  //   if(this.opusUser && this.opusUser.split('.').length === 3){
-  //   this.getUser()
-  //     .subscribe(
-  //       res => {
-  //         if (res){
-  //           this.router.navigate(['/usersList'])
-  //           return true
-  //           //localStorage.setItem('id', res.id.toString());
-  //           //this.router.navigate(['/usersList'])
-  //         }
-  //       }
-  //     )
-  //   }
-  //   return false
-  // }            
+              private common: CommonFunctions) {}           
 
   getUser(): Observable<string> {
     const url = '/api/me'
-    return this.http.get(url, this.jwt())
+    return this.http.get(url, this.common.jwt())
         .map(this.common.extractData)
         .catch(this.common.handleError);
   }
@@ -69,12 +46,12 @@ export class AuthService
   }
 
   // create authorization header with jwt token
-  jwt() {
-       let opusUser = document.cookie.split("Opus_User=")[1];
-       if (opusUser && opusUser.split('.').length === 3) {
-           let headers = new Headers({ 'Authorization': opusUser});
-           return new RequestOptions({ headers: headers });
-       }
-   }
+  // jwt() {
+  //      let opusUser = document.cookie.split("Opus_User=")[1];
+  //      if (opusUser && opusUser.split('.').length === 3) {
+  //          let headers = new Headers({ 'Authorization': opusUser});
+  //          return new RequestOptions({ headers: headers });
+  //      }
+  //  }
 
 }

@@ -37,7 +37,7 @@ export class RegisterComponent {
                        document.cookie = `Opus_User=${res.token}; Path=/;`
                        localStorage.setItem('id', res.id+'');
                     }
-                   this.router.navigate(['/usersList']);
+                   this.router.navigate(['/dashboard']);
         },
               error => {
                   console.log("error", error);

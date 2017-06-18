@@ -6,7 +6,7 @@ import { Observable }                               from 'rxjs/Observable';
 export class CommonFunctions {
 
   jwt() {
-       let tellTovaUser = document.cookie.split("TellTova_User=")[1];
+       let tellTovaUser = document.cookie.split("Opus_User=")[1];
        if (tellTovaUser && tellTovaUser.split('.').length === 3) {
            let headers = new Headers({ 'Authorization': tellTovaUser});
            return new RequestOptions({ headers: headers });
