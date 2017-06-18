@@ -27,7 +27,10 @@ app.use("/node_modules", express.static(path.resolve(__dirname, './node_modules'
 app.use(express.static(__dirname + '/src'));
 
 //----Authentication Controller----//
-const authCtrl = require('./controllers/authCtrl.js')
+const authCtrl = require('./controllers/authCtrl.js');
+
+//----User Controller----//
+const userCtrl = require('./controllers/userCtrl.js');
 
 //----Login Required Middleware----//
 function ensureAuthenticated(req, res, next) {
@@ -54,6 +57,9 @@ function ensureAuthenticated(req, res, next) {
 app.get('/api/me/', ensureAuthenticated, authCtrl.getMe);
 app.post('/auth/login', authCtrl.login);
 app.post('/auth/register', authCtrl.register);
+
+//----User Ctrl----//
+app.get('/api/getUsers', ensureAuthenticated, userCtrl.getUsers)
 
 app.listen(config.port, function(){
   console.log('This part works on ', config.port)

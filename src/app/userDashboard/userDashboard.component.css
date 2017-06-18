@@ -1,0 +1,26 @@
+.dashboard-header {
+    width: 100vw;
+    height: 10vh;
+    border-bottom: 1px solid black;
+    box-shadow: 10px 10px 5px #888888;
+    background: mintcream;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 5vw;
+    padding-right: 5vw;
+}
+
+.dashboard-header h1 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+}
+
+.dashboard-main {
+    width: 100vw;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #869E9C;
+}

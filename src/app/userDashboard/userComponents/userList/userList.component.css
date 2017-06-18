@@ -1,0 +1,39 @@
+.userList-main {
+    width: 50vw;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background: mintcream;
+    border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: 10px 10px 5px #888888;
+    padding: 10px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.userList-pagination {
+    display: flex;
+    justify-content: center;
+    color: black;
+    text-decoration: none;
+    width: 40vw;
+}
+
+.userList-pagination button {
+    width: 5vw;
+    outline: none;
+    border: none;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    background: none;
+}
+
+.userList-pagination button:hover {
+    cursor: pointer
+}
+
+.activePage {
+    background: red;
+}

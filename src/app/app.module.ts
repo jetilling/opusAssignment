@@ -8,7 +8,8 @@ import { HttpModule, JsonpModule }              from '@angular/http';
 import { AuthComponent }                        from './auth/auth.component';
 import { RegisterComponent }                    from './auth/register/register.component';
 import { LoginComponent }                       from './auth/login/login.component';
-import { UsersListComponent }                   from './usersList/usersList.component';
+import { UserDashboardComponent }               from './userDashboard/userDashboard.component';
+import { UserListComponent }                    from './userDashboard/userComponents/userList/userList.component';
 
 //--------Services---------//
 import { AuthService }                          from './services/auth.service';
@@ -31,7 +32,8 @@ import { AppRoutingModule }                     from './app-routing.module';
     AuthComponent,
     RegisterComponent,
     LoginComponent,
-    UsersListComponent,
+    UserDashboardComponent,
+    UserListComponent,
   ],
   providers: [
     AuthService,

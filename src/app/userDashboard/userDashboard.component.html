@@ -1,0 +1,7 @@
+<header class="dashboard-header">
+    <h1>Welcome Back, {{firstName}}!</h1>
+    <button class="dashboard-logout-button" type="button" name="button" (click)="logout()">Log out</button>
+</header>
+<section class="dashboard-main">
+    <user-list *ngIf="userList"></user-list>
+</section>

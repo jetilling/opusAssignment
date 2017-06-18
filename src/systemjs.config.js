@@ -22,7 +22,8 @@
       // other libraries
       'rxjs':                      'npm:rxjs',
       'core-js':                   'npm:core-js/client/shim.min.js',
-      'zone.js':                   'npm:zone.js/dist/zone.js'
+      'zone.js':                   'npm:zone.js/dist/zone.js',
+      'underscore':                'npm:underscore/underscore.js'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {

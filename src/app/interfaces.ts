@@ -9,3 +9,25 @@ export class User {
     password: string;
     token: string;
 }
+
+/**
+ * Interface for Users list
+ */
+export class UsersObject {
+    id: number;
+    email: string;
+    firstName: string;
+    lastName: string;
+}
+
+export class PagerDetails {
+    totalItems: number;
+    currentPage: number;
+    pageSize: number;
+    totalPages: number;
+    startPage: number;
+    endPage: number;
+    startIndex: number;
+    endIndex: number;
+    pages: number[];
+}

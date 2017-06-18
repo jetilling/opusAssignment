@@ -2,7 +2,7 @@ import { Component }                             from '@angular/core';
 import {FormBuilder, FormControl, Validators, FormGroup} from '@angular/forms';
 import {Router}                                          from '@angular/router';
 import { AuthService }                                   from '../../services/auth.service';
-//import { ILoginData }                                     from './../interfaces';
+
 
 
 @Component({
@@ -25,12 +25,11 @@ export class LoginComponent {
     this.auth.login(this.model)
       .subscribe(
               res => {
-                  console.log("STUFF: ", res);
                   if (res && res.token) {
                        document.cookie = `Opus_User=${res.token}; Path=/;`
                        localStorage.setItem('id', res.id+'');
                    }
-                  this.router.navigate(['/usersList']);
+                  this.router.navigate(['/dashboard']);
       },
              error => {
                  console.log("error", error);
