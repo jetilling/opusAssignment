@@ -1,9 +1,9 @@
 //--------Angular Imports---------//
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit }                  from '@angular/core';
 
 //--------Other Imports----------//
-import { PagerDetails }         from '../../../interfaces';
-import { UsersService }         from '../../../services/users.service';
+import { PagerDetails, UsersObject }          from '../../../interfaces';
+import { UsersService }                       from '../../../services/users.service';
 
 @Component({
   moduleId: module.id,
@@ -16,6 +16,7 @@ export class UserListComponent implements OnInit
 {
   firstName: string;
   opusUser: string = document.cookie.split("Opus_User=")[1];
+  userId: number;
 
   constructor(private usersService: UsersService) { }
 
@@ -24,7 +25,7 @@ export class UserListComponent implements OnInit
     this.usersService.getUsers();
   }
 
-  get pagedUsers(): any[] {
+  get pagedUsers(): UsersObject[] {
     return this.usersService.pagedUsers
   }
 
@@ -33,10 +34,15 @@ export class UserListComponent implements OnInit
   }
 
   //--------Methods----------//
-  setPage(page: number) {
+  setPage(page: number) 
+  {
+    this.usersService.currentPage = page;
     this.usersService.setPage(page)
   }
 
-
+  confirmDelete(id: number) {
+    this.usersService.userIdToDelete = id;
+    this.usersService.showConfirmDelete = true;
+  }
 
 }

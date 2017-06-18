@@ -12,10 +12,9 @@ import { AuthService} from '../../services/auth.service';
 
 export class RegisterComponent {
   model: any = {};
-  loading: boolean = false;
   loginForm: boolean = true;
   RegisterForm: boolean = false;
-  opusUser: string = document.cookie.split("Opus_User=")[1];
+  //opusUser: string = document.cookie.split("Opus_User=")[1];
 
   constructor(
       private router: Router,
@@ -28,21 +27,7 @@ export class RegisterComponent {
   }
 
   register() {
-      this.loading = true;
       this.auth.register(this.model)
-           .subscribe(
-               res => {
-
-                   if (res && res.token) {
-                       document.cookie = `Opus_User=${res.token}; Path=/;`
-                       localStorage.setItem('id', res.id+'');
-                    }
-                   this.router.navigate(['/dashboard']);
-        },
-              error => {
-                  console.log("error", error);
-                  this.loading = false;
-              });
   }
 
 }

@@ -15,7 +15,7 @@ import { AuthService }                                   from '../../services/au
 export class LoginComponent {
   model: any = {};
   loading = false;
-  opusUser: string = document.cookie.split("Opus_User=")[1];
+  //opusUser: string = document.cookie.split("Opus_User=")[1];
 
   constructor(private auth: AuthService,
               private router: Router){}
@@ -23,18 +23,6 @@ export class LoginComponent {
   login() {
     this.loading = true;
     this.auth.login(this.model)
-      .subscribe(
-              res => {
-                  if (res && res.token) {
-                       document.cookie = `Opus_User=${res.token}; Path=/;`
-                       localStorage.setItem('id', res.id+'');
-                   }
-                  this.router.navigate(['/dashboard']);
-      },
-             error => {
-                 console.log("error", error);
-                 this.loading = false;
-             });
   }
 
 

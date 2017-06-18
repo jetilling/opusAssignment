@@ -20,6 +20,9 @@ export class UsersObject {
     lastName: string;
 }
 
+/**
+ * Interface for Pagination Details
+ */
 export class PagerDetails {
     totalItems: number;
     currentPage: number;

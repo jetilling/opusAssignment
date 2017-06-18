@@ -1,23 +1,28 @@
 <section class="userList-main">
     <div class="userList-users">
-        <div *ngFor="let user of pagedUsers">{{user.first_name}}</div>
+        <div *ngFor="let user of pagedUsers">
+            {{user.first_name}}
+            {{user.last_name}}
+            {{user.email}}
+            <button (click)="confirmDelete(user.id)">Delete</button>
+        </div>
     </div>
     
 
     <ul *ngIf="pagerDetails.pages && pagerDetails.pages.length" class="userList-pagination">
-        <li [ngClass]="{disabled:pagerDetails.currentPage === 1}">
+        <li [ngClass]="{'disabled':pagerDetails.currentPage === 1}">
             <button (click)="setPage(1)">First</button>
         </li>
-        <li [ngClass]="{disabled:pagerDetails.currentPage === 1}">
+        <li [ngClass]="{'disabled':pagerDetails.currentPage === 1}">
             <button (click)="setPage(pagerDetails.currentPage - 1)">Prev</button>
         </li>
         <li *ngFor="let page of pagerDetails.pages" [ngClass]="{'active activePage':pagerDetails.currentPage === page}" class="activePage">
             <button (click)="setPage(page)">{{page}}</button>
         </li>
-        <li [ngClass]="{disabled:pagerDetails.currentPage === pagerDetails.totalPages}">
+        <li [ngClass]="{'disabled':pagerDetails.currentPage === pagerDetails.totalPages}">
             <button (click)="setPage(pagerDetails.currentPage + 1)">Next</button>
         </li>
-        <li [ngClass]="{disabled:pagerDetails.currentPage === pagerDetails.totalPages}">
+        <li [ngClass]="{'disabled':pagerDetails.currentPage === pagerDetails.totalPages}">
             <button (click)="setPage(pagerDetails.totalPages)">Last</button>
         </li>
     </ul>

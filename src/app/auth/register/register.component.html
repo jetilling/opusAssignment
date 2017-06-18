@@ -18,7 +18,7 @@
               <div *ngIf="f.submitted && !email.valid" class="help-block">Email is required</div>
           </div>
           <div class="form-input" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
-              <input class="field-input" type="password"name="password" [(ngModel)]="model.password" #password="ngModel" required />
+              <input class="field-input" type="password"name="password" min="8" [(ngModel)]="model.password" #password="ngModel" required />
               <label class="field-label" for="password">Password</label>
               <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
           </div>

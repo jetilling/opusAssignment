@@ -1,0 +1,8 @@
+.confirmDelete-main {
+  width: 20vw;
+  height: 20vh;
+  background: lightgray;
+  position: fixed;
+  top: 30vh;
+  left: 30vw;
+}
