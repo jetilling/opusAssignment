@@ -2,40 +2,55 @@ namespace Opus
 {
   export interface IUsersService
   {
-    // /**
-    //  * User's first name
-    //  */
-    //  firstName: string
+     /**
+      * Logged in user information
+      */
+     currentUser: UsersObject
 
-    //  /**
-    //   * User's last name
-    //   */
-    //   lastName: string
+     /**
+      * Current User Info is loaded
+      */
+     currentUserInfoLoaded: boolean
 
-      /**
-       * List of all users
-       */
-      allUsers: UsersObject[]
+     /**
+      * List of all users
+      */
+     allUsers: UsersObject[]
 
-      /**
-       * Pagination Object
-       */
-      pagerDetails: PagerDetails
+     /**
+      * Pagination Object
+      */
+     pagerDetails: PagerDetails
 
-      /**
-       * List of current users on the page
-       */
-       pagedUsers: UsersObject[]
+     /**
+      * List of current users on the page
+      */
+     pagedUsers: UsersObject[]
 
-      /**
-       * Retrieves User list
-       */
-      getUsers: () => void
+     /**
+      * Current Page
+      */
+      currentPage: number
 
-      /**
-       * Sets a new page
-       */
-      setPage: (page: number) => void
+     /**
+      * Show the confirm-delete modal
+      */
+     showConfirmDelete: boolean
+
+     /**
+      * Id of user to delete
+      */
+     userIdToDelete: number
+
+     /**
+      * Retrieves User list
+      */
+     getUsers: () => void
+
+     /**
+      * Sets a new page
+      */
+     setPage: (page: number) => void
 
   }
 }
@@ -56,9 +71,53 @@ export class UsersService implements Opus.IUsersService
   constructor(private http: Http,
               private common: CommonFunctions) {}
   
+  currentUser: UsersObject
+  currentUserInfoLoaded: boolean = false;
   allUsers: UsersObject[]
   pagerDetails: PagerDetails | any = {}
   pagedUsers: UsersObject[];
+  currentPage: number;
+  showConfirmDelete: boolean;
+  userIdToDelete: number;
+
+  //--------Methods----------//
+
+  getLoggedInUser()
+  {
+      const userId = localStorage.getItem('opusId');
+      const url = '/api/getLoggedInUser/' + userId;
+      this.http.get(url, this.common.jwt())
+               .map(this.common.extractData)
+               .subscribe(
+                   res => {
+                       this.currentUser = res[0]
+                       this.currentUserInfoLoaded = true
+                   }
+               )
+  }
+
+  deleteUser(id: number)
+  {
+    const url = '/api/deleteUser/' + id;
+    this.http.delete(url, this.common.jwt())
+            .map(this.common.extractData)
+            .subscribe(res => {
+                if (res) {
+                    this.allUsers = this.removeFromUsers(this.allUsers, id)
+                    this.showConfirmDelete = false;
+                    this.setPage(this.currentPage)
+                }
+            })
+  }
+
+  private removeFromUsers(array: UsersObject[], value: number): UsersObject[] {
+    array.forEach(function(element, index){
+                        if (element.id === value) {
+                            array.splice(index, 1);
+                        }
+                    })
+    return array;
+  }
 
   getUsers() 
   {
@@ -66,9 +125,7 @@ export class UsersService implements Opus.IUsersService
     this.http.get(url, this.common.jwt())
             .map(this.common.extractData)
             .subscribe((res: UsersObject[]) => {
-                // set items to json response
                 this.allUsers = res;
-                // initialize to page 1
                 this.setPage(1);
             });
   }
@@ -76,9 +133,7 @@ export class UsersService implements Opus.IUsersService
   setPage(page: number) {
     if (page < 1 || page > this.pagerDetails.totalPages) {
         return;
-  }
-
-    // get pager object from service
+    }
     this.pagerDetails = this.getPages(this.allUsers.length, page);
 
     // get current page of items
@@ -88,16 +143,14 @@ export class UsersService implements Opus.IUsersService
   }
 
   private getPages(totalItems: number, currentPage: number = 1, pageSize: number = 5) {
-    // calculate total pages
+    
     let totalPages = Math.ceil(totalItems / pageSize);
 
     let startPage: number, endPage: number;
     if (totalPages <= 10) {
-        // less than 10 total pages so show all
         startPage = 1;
         endPage = totalPages;
     } else {
-        // more than 10 total pages so calculate start and end pages
         if (currentPage <= 6) {
             startPage = 1;
             endPage = 10;
@@ -110,11 +163,11 @@ export class UsersService implements Opus.IUsersService
         }
     }
 
-    // calculate start and end item indexes
+    //start and end item indexes
     let startIndex = (currentPage - 1) * pageSize;
     let endIndex = Math.min(startIndex + pageSize - 1, totalItems - 1);
 
-    // create an array of pages to repeat in the pager control
+    //array of pages to repeat in the pager control
     let pages = _.range(startPage, endPage + 1);
 
     // return object with all pager properties required by the view

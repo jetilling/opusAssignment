@@ -18,6 +18,8 @@ function getSafeUser (user) {
   return {
     id: user.id,
     email: user.email,
+    firstName: user.first_name,
+    lastName: user.last_name,
     token: createJWT(user)
   }
 }
@@ -44,10 +46,7 @@ module.exports = {
                   cb(err, isMatch);
                 });
               };
-                res.send(
-                //token: createJWT(user),
-                getSafeUser(user)
-              )
+                res.send( getSafeUser(user) )
             })
         })
   },
@@ -64,10 +63,7 @@ module.exports = {
             if (err) { return next(err); }
             db.register_user([req.body.email, hash, req.body.firstName, req.body.lastName], function(err, users){
               db.users.findOne({email: req.body.email}, function(err, user){
-                res.send({
-                          token: createJWT(user),
-                          user: getSafeUser(user)
-                        });
+                res.send( getSafeUser(user) );
               })
             })
           });

@@ -60,6 +60,8 @@ app.post('/auth/register', authCtrl.register);
 
 //----User Ctrl----//
 app.get('/api/getUsers', ensureAuthenticated, userCtrl.getUsers)
+app.get('/api/getLoggedInUser/:id', ensureAuthenticated, userCtrl.getLoggedInUser)
+app.delete('/api/deleteUser/:id', ensureAuthenticated, userCtrl.deleteUser);
 
 app.listen(config.port, function(){
   console.log('This part works on ', config.port)

@@ -1,7 +1,8 @@
 <header class="dashboard-header">
-    <h1>Welcome Back, {{firstName}}!</h1>
+    <h1>Welcome Back<span  *ngIf="currentUserInfoLoaded">, {{currentUserInfo.first_name}}!</span></h1>
     <button class="dashboard-logout-button" type="button" name="button" (click)="logout()">Log out</button>
 </header>
 <section class="dashboard-main">
+    <confirm-delete *ngIf="showConfirmDelete"></confirm-delete>
     <user-list *ngIf="userList"></user-list>
 </section>

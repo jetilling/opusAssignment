@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 //--------Other Imports----------//
+import { UsersObject }          from '../interfaces';
 import { AuthService}           from '../services/auth.service';
 import { UsersService }         from '../services/users.service';
 
@@ -30,16 +31,27 @@ export class UserDashboardComponent implements OnInit
       .subscribe(
         res => {
           if (!res) this.router.navigate(['/login'])
-          else this.usersService.getUsers()
+          else {
+            this.usersService.getUsers();
+            this.usersService.getLoggedInUser();
+          }
         }
       )
     }
     else this.router.navigate(['/login'])
   }
 
-  // get userName(): string {
-  //   return this.
-  // }
+  get currentUserInfo(): UsersObject {
+    return this.usersService.currentUser
+  }
+
+  get currentUserInfoLoaded(): boolean {
+    return this.usersService.currentUserInfoLoaded
+  }
+
+  get showConfirmDelete(): boolean {
+    return this.usersService.showConfirmDelete
+  }
 
 //--------Methods----------//
 

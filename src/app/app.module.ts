@@ -10,6 +10,7 @@ import { RegisterComponent }                    from './auth/register/register.c
 import { LoginComponent }                       from './auth/login/login.component';
 import { UserDashboardComponent }               from './userDashboard/userDashboard.component';
 import { UserListComponent }                    from './userDashboard/userComponents/userList/userList.component';
+import { ConfirmDeleteComponent }               from './modals/confirmDelete.component';
 
 //--------Services---------//
 import { AuthService }                          from './services/auth.service';
@@ -34,6 +35,7 @@ import { AppRoutingModule }                     from './app-routing.module';
     LoginComponent,
     UserDashboardComponent,
     UserListComponent,
+    ConfirmDeleteComponent,
   ],
   providers: [
     AuthService,
