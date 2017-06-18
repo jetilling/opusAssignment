@@ -1,4 +1,4 @@
-
+<section class="main">
 <div class="login">
     <h2 class="login-title">Login 'n Stuff</h2>
     <form class="login-form" name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
@@ -18,3 +18,8 @@
     </form>
 
 </div>
+
+    <div>
+        <a routerLink='/register' routerLinkActive="active">Don't have an account? Register here!</a>
+    </div>
+</section>
