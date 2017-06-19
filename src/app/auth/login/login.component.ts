@@ -1,6 +1,7 @@
 import { Component }                             from '@angular/core';
 import {FormBuilder, FormControl, Validators, FormGroup} from '@angular/forms';
-import {Router}                                          from '@angular/router';
+import { Router }                                          from '@angular/router';
+import { User }                                            from '../../interfaces';
 import { AuthService }                                   from '../../services/auth.service';
 
 
@@ -13,7 +14,7 @@ import { AuthService }                                   from '../../services/au
 })
 
 export class LoginComponent {
-  model: any = {};
+  model: User | any = {};
   loading = false;
   //opusUser: string = document.cookie.split("Opus_User=")[1];
 

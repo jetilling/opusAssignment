@@ -38,9 +38,9 @@ namespace Opus
      showConfirmDelete: boolean
 
      /**
-      * Id of user to delete
+      * Id of selected user
       */
-     userIdToDelete: number
+     selectedUserId: number
 
      /**
       * Retrieves User list
@@ -78,7 +78,7 @@ export class UsersService implements Opus.IUsersService
   pagedUsers: UsersObject[];
   currentPage: number;
   showConfirmDelete: boolean;
-  userIdToDelete: number;
+  selectedUserId: number;
 
   //--------Methods----------//
 

@@ -46,7 +46,10 @@ module.exports = {
                   cb(err, isMatch);
                 });
               };
-                res.send( getSafeUser(user) )
+              db.add_login_date([user.id], function(err){
+                if(err) console.log(err)
+              })
+              res.send( getSafeUser(user) )
             })
         })
   },
