@@ -16,7 +16,6 @@ export class UserListComponent implements OnInit
 {
   firstName: string;
   opusUser: string = document.cookie.split("Opus_User=")[1];
-  userId: number;
 
   constructor(private usersService: UsersService) { }
 
@@ -40,9 +39,15 @@ export class UserListComponent implements OnInit
     this.usersService.setPage(page)
   }
 
-  confirmDelete(id: number) {
-    this.usersService.userIdToDelete = id;
+  confirmDelete(id: number) 
+  {
+    this.usersService.selectedUserId = id;
     this.usersService.showConfirmDelete = true;
+  }
+
+  selectUser(id: number)
+  {
+    this.usersService.selectedUserId = id
   }
 
 }

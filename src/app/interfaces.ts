@@ -18,6 +18,7 @@ export class UsersObject {
     email: string;
     firstName: string;
     lastName: string;
+    login_dates?: Date[];
 }
 
 /**

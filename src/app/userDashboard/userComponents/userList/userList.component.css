@@ -1,5 +1,5 @@
 .userList-main {
-    width: 50vw;
+    width: 40vw;
     height: 70vh;
     display: flex;
     flex-direction: column;
@@ -7,10 +7,14 @@
     align-items: center;
     background: mintcream;
     border: 1px solid black;
-    border-radius: 10px;
+    border-radius: 10px 0px 0px 10px;
     box-shadow: 10px 10px 5px #888888;
     padding: 10px;
     font-family: 'Roboto', sans-serif;
+}
+
+.userList-main h1 {
+    font-size: 20px;
 }
 
 .userList-pagination {
@@ -36,4 +40,13 @@
 
 .activePage {
     background: red;
+}
+
+.userList-user:hover {
+    background: lightblue;
+    cursor: pointer;
+}
+
+.userList-user:active {
+    background: lightblue;
 }

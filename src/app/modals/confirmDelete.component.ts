@@ -17,7 +17,7 @@ export class ConfirmDeleteComponent
   constructor(private usersService: UsersService) { }
 
   get userId(): number {
-    return this.usersService.userIdToDelete
+    return this.usersService.selectedUserId
   }
 
   confirmDelete() {
