@@ -69,13 +69,23 @@ export class AuthService
     return true;
   }
 
+  validateUser(token: string) {
+    let validationToken = {token: token}
+    const url = '/auth/validate';
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    return this.http.put(url, JSON.stringify(validationToken), options)
+                  .map(this.common.extractData)
+                  .catch(this.common.handleError);
+  }
+
   private setCookies(res: User) {
     if (res && res.token) {
       document.cookie = `Opus_User=${res.token}; Path=/;`
       localStorage.setItem('opusId', res.id+'');
       this.currentUser = res
     }
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/validate']);
   }
 
 }
