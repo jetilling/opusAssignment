@@ -12,6 +12,8 @@ import { UserDashboardComponent }               from './userDashboard/userDashbo
 import { UserListComponent }                    from './userDashboard/userComponents/userList/userList.component';
 import { UserDetailsComponent }                 from './userDashboard/userComponents/userDetails/userDetails.component';
 import { ConfirmDeleteComponent }               from './modals/confirmDelete.component';
+import { ValidateEmailComponent }               from './validation/validateEmail.component';
+import { ValidatingComponent }                  from './validation/validating.component';
 
 //--------Services---------//
 import { AuthService }                          from './services/auth.service';
@@ -38,6 +40,8 @@ import { AppRoutingModule }                     from './app-routing.module';
     UserListComponent,
     UserDetailsComponent,
     ConfirmDeleteComponent,
+    ValidateEmailComponent,
+    ValidatingComponent,
   ],
   providers: [
     AuthService,

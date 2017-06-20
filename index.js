@@ -5,14 +5,14 @@ const jwt = require('jwt-simple')
 const path = require('path')
 const massive = require('massive')
 const moment = require('moment')
-const config = require('./config.json')
-const string = config.connectionString
+const dotenv = require('dotenv')
 
-const db = massive.connectSync({connectionString: string})
-// console.log(db.register_user(['j@j.com', "jfdkal;sdlkf"], function(err, users){
-//   if (err) console.log(err)
-//   else console.log(users)
-// }))
+//----Load Environment Variables----//
+dotenv.load({ path: '.env' });
+
+//----Connect to Database----//
+const db = massive.connectSync({connectionString: process.env.DB_CONNECT})
+
 
 const corsOptions = {
   origin: 'http://localhost:6060'
@@ -40,7 +40,7 @@ function ensureAuthenticated(req, res, next) {
   var token = req.header('Authorization');
   var payload = null;
   try {
-    payload = jwt.decode(token, config.TOKEN_SECRET);
+    payload = jwt.decode(token, process.env.TOKEN_SECRET);
   }
   catch (err) {
     return res.status(401).send({ message: err.message });
@@ -51,10 +51,14 @@ function ensureAuthenticated(req, res, next) {
   req.user = payload.sub;
   next();
 }
-
+function doStuff(req, res, next){
+  console.log('stuff: ', req.body.token)
+  next();
+}
 //----Endpoints----//
 //----authCtrl----//
 app.get('/api/me/', ensureAuthenticated, authCtrl.getMe);
+app.put('/auth/validate', doStuff, authCtrl.validateUser);
 app.post('/auth/login', authCtrl.login);
 app.post('/auth/register', authCtrl.register);
 
@@ -63,6 +67,6 @@ app.get('/api/getUsers', ensureAuthenticated, userCtrl.getUsers)
 app.get('/api/getLoggedInUser/:id', ensureAuthenticated, userCtrl.getLoggedInUser)
 app.delete('/api/deleteUser/:id', ensureAuthenticated, userCtrl.deleteUser);
 
-app.listen(config.port, function(){
-  console.log('This part works on ', config.port)
+app.listen(process.env.PORT, function(){
+  console.log('Listening on port ', process.env.PORT)
 })

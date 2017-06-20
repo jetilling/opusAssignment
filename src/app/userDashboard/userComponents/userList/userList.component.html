@@ -2,7 +2,7 @@
     <h1>User List</h1>
     <div class="userList-users">
         <div *ngFor="let user of pagedUsers" (click)="selectUser(user.id)" class="userList-user">
-            {{user.first_name}}
+            <div class="userList-name"></div>{{user.first_name}}
             {{user.last_name}}
             {{user.email}}
             <button (click)="confirmDelete(user.id)">Delete</button>

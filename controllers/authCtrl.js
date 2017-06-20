@@ -1,9 +1,10 @@
 var app = require('../index'),
     db = app.get('db'),
-    config = require('../config.json'),
     moment = require('moment'),
     jwt = require('jwt-simple'),
-    bcrypt = require('bcrypt-nodejs');
+    bcrypt = require('bcrypt-nodejs'),
+    randToken = require('rand-token');
+    sendGridCtrl = require('./sendGridCtrl.js');
 
 function createJWT(user) {
   var payload = {
@@ -11,7 +12,7 @@ function createJWT(user) {
     iat: moment().unix(),
     exp: moment().add(1, 'day').unix()
   };
-  return jwt.encode(payload, config.TOKEN_SECRET);
+  return jwt.encode(payload, process.env.TOKEN_SECRET);
 }
 
 function getSafeUser (user) {
@@ -60,12 +61,14 @@ module.exports = {
         return res.status(409).send({ message: 'Email is already taken' });
       }
       else {
+        var token = randToken.generate(16);
         bcrypt.genSalt(10, function(err, salt) {
           if (err) { return next(err); }
           bcrypt.hash(req.body.password, salt, null, function(err, hash) {
             if (err) { return next(err); }
-            db.register_user([req.body.email, hash, req.body.firstName, req.body.lastName], function(err, users){
+            db.register_user([req.body.email, hash, req.body.firstName, req.body.lastName, token], function(err, users){
               db.users.findOne({email: req.body.email}, function(err, user){
+                if (user) sendGridCtrl.sendValidationEmail({email: user.email, firstName: user.first_name, token: token});
                 res.send( getSafeUser(user) );
               })
             })
@@ -77,4 +80,12 @@ module.exports = {
     });
   },
 
+  validateUser: function(req, res) {
+    console.log('hey');
+    console.log(typeof req.body.token);
+    db.validate_email([req.body.token], function(err, success) {
+      if(err) console.log("Error: ", err);
+      else res.status(200).send(true);
+    })
+  }
 }
