@@ -75,13 +75,13 @@ export class AuthService
     return true;
   }
 
-  validateUser(token: string) {
+  validateUser(token: string, login?: boolean) {
     this.userToken = token;
-    let validationToken = {token: token}
+    let validationObject = {token: token, login: login}
     const url = '/auth/validate';
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
-    return this.http.put(url, JSON.stringify(validationToken), options)
+    return this.http.put(url, JSON.stringify(validationObject), options)
                   .map(this.common.extractData)
                   .catch(this.common.handleError);
   }
@@ -99,12 +99,11 @@ export class AuthService
     const url = "/auth/resetPassword"
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
-    console.log(user)
     this.http.put(url, JSON.stringify(user), options)
                   .map(this.common.extractData)
                   .subscribe(
                         res => {
-                          //user.email = res.email;
+                          user.email = res.email;
                           this.login(user)
                         },
                         error => {
@@ -112,7 +111,7 @@ export class AuthService
                   })
   }
 
-  private setCookies(res: User, newUser: boolean) {
+ setCookies(res: User, newUser: boolean) {
     if (res && res.token) {
       document.cookie = `Opus_User=${res.token}; Path=/;`
       localStorage.setItem('opusId', res.id+'');
