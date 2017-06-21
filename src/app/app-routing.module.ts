@@ -6,6 +6,8 @@ import { RegisterComponent }        from './auth/register/register.component';
 import { UserDashboardComponent }   from './userDashboard/userDashboard.component';
 import { ValidateEmailComponent }   from './validation/validateEmail.component';
 import { ValidatingComponent }      from './validation/validating.component';  
+import { ResetPasswordComponent }   from './passwordReset/resetPassword/resetPassword.component';
+import { ForgotPasswordComponent }  from './passwordReset/forgotPassword/forgotPassword.component';
 
 
 const routes: Routes = [
@@ -14,7 +16,11 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'dashboard', component: UserDashboardComponent },
   { path: 'validate', component: ValidateEmailComponent },
-  { path: 'validating/:token', component: ValidatingComponent }
+  { path: 'validating', redirectTo: '/register', pathMatch: 'full'},
+  { path: 'validating/:token', component: ValidatingComponent },
+  { path: 'resetPassword', redirectTo: '/login', pathMatch: 'full'},
+  { path: 'resetPassword/:token', component: ResetPasswordComponent },
+  { path: 'forgotPassword', component: ForgotPasswordComponent }
 ];
 
 @NgModule({

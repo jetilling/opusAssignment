@@ -51,5 +51,25 @@ module.exports = {
       if (error) console.log('Error response received: ', error)
       else return response.statusCode
     });
+  },
+
+  sendPasswordResetEmail: function(userInfo) {
+    
+    var request = createRequest(userInfo, 'Password Reset', './emailTemplates/passwordReset.html')
+
+    sg.API(request, function (error, response) {
+      if (error) console.log('Error response received: ', error)
+      else return response.statusCode
+    });
+  },
+
+  sendPasswordChangedEmail: function(userInfo) {
+
+    var request = createRequest(userInfo, 'Password Changed', './emailTemplates/passwordChanged.html')
+
+    sg.API(request, function (error, response) {
+      if (error) console.log('Error response received: ', error)
+      else return response.statusCode
+    });
   }
 }

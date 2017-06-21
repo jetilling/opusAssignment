@@ -1,7 +1,7 @@
 import { Injectable }                               from '@angular/core';
 import {Router}                                     from '@angular/router';
 import { Http, Headers, RequestOptions, Response }  from '@angular/http';
-import { User, UsersObject }                        from '../interfaces';
+import { User, UsersObject, IEmail, IUser }     from '../interfaces';
 import { CommonFunctions }                          from './commonFunctions.service';
 import { UsersService }                             from './users.service';
 import { Observable }                               from 'rxjs/Observable';
@@ -11,12 +11,16 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class AuthService
 {
-  
+
+  userToken: string;
+  showValidationMessage: boolean = false;
+
   constructor(private http: Http,
               private router: Router,
               private usersService: UsersService,
               private common: CommonFunctions) {}  
 
+//----Properties----//
   get currentUser(): UsersObject {
     return this.usersService.currentUser
   }         
@@ -25,6 +29,7 @@ export class AuthService
     this.usersService.currentUser = val
   }
 
+//----Methods----//
   getUser(): Observable<string> {
     const url = '/api/me'
     return this.http.get(url, this.common.jwt())
@@ -40,7 +45,8 @@ export class AuthService
           .map(this.common.extractData)
           .subscribe(
               res => {
-                this.setCookies(res)
+                if (res.message) this.showValidationMessage = true;
+                else this.setCookies(res, false)
               },
               error => {
                 this.common.handleError
@@ -54,12 +60,12 @@ export class AuthService
     this.http.post(url, JSON.stringify(user), options)
                     .map(this.common.extractData)
                     .subscribe(
-              res => {
-                this.setCookies(res);
-              },
-              error => {
-                this.common.handleError
-        })
+                          res => {
+                            this.router.navigate(['/validate'])
+                          },
+                          error => {
+                            this.common.handleError
+                    })
   }
 
   logout(): boolean 
@@ -70,6 +76,7 @@ export class AuthService
   }
 
   validateUser(token: string) {
+    this.userToken = token;
     let validationToken = {token: token}
     const url = '/auth/validate';
     let headers = new Headers({ 'Content-Type': 'application/json' });
@@ -79,13 +86,39 @@ export class AuthService
                   .catch(this.common.handleError);
   }
 
-  private setCookies(res: User) {
+  submitResetEmail(email: IEmail) {
+    const url = "/auth/sendPasswordResetUrl"
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    return this.http.put(url, JSON.stringify(email), options)
+                  .map(this.common.extractData)
+                  .catch(this.common.handleError);
+  }
+
+  resetPassword(user: IUser) {
+    const url = "/auth/resetPassword"
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    console.log(user)
+    this.http.put(url, JSON.stringify(user), options)
+                  .map(this.common.extractData)
+                  .subscribe(
+                        res => {
+                          //user.email = res.email;
+                          this.login(user)
+                        },
+                        error => {
+                          this.common.handleError
+                  })
+  }
+
+  private setCookies(res: User, newUser: boolean) {
     if (res && res.token) {
       document.cookie = `Opus_User=${res.token}; Path=/;`
       localStorage.setItem('opusId', res.id+'');
       this.currentUser = res
     }
-    this.router.navigate(['/validate']);
+    newUser ? this.router.navigate(['/validate']) : this.router.navigate(['/dashboard'])
   }
 
 }

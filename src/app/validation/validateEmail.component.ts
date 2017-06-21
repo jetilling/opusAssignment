@@ -21,7 +21,7 @@ export class ValidateEmailComponent implements OnInit {
 
   get email(): string {
     if (this.usersService.currentUser.email) return this.usersService.currentUser.email
-    return ''
+    return 'your email.'
   }
 
 }
