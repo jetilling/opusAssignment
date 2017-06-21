@@ -89,6 +89,17 @@ module.exports = {
   validateUser: function(req, res) {
     db.validate_email([req.body.token], function(err, success) {
       if(err) console.log("Error: ", err)
+      else if (req.body.login) {
+        db.users.findOne({ validation_token: req.body.token }, function(err, user) {
+          if (user) {
+              db.add_login_date([user.id], function(err){
+                if(err) console.log(err)
+              })
+              res.send( getSafeUser(user) )
+          }
+          else res.status(500).send({message: 'No such token exists'})
+        })
+      }
       else res.status(200).send(success);
     })
   },
