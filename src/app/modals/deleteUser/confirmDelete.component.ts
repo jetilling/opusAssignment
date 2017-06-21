@@ -1,8 +1,8 @@
 //--------Angular Imports---------//
-import { Component, Input }            from '@angular/core';
+import { Component }            from '@angular/core';
 
 //--------Other Imports----------//
-import { UsersService }         from '../services/users.service';
+import { UsersService }         from './../../services/users.service';
 
 @Component({
   moduleId: module.id,

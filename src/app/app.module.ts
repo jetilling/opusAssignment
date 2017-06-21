@@ -11,7 +11,8 @@ import { LoginComponent }                       from './auth/login/login.compone
 import { UserDashboardComponent }               from './userDashboard/userDashboard.component';
 import { UserListComponent }                    from './userDashboard/userComponents/userList/userList.component';
 import { UserDetailsComponent }                 from './userDashboard/userComponents/userDetails/userDetails.component';
-import { ConfirmDeleteComponent }               from './modals/confirmDelete.component';
+import { ConfirmDeleteComponent }               from './modals/deleteUser/confirmDelete.component';
+import { AddUserComponent }                     from './modals/addUser/addUser.component';
 import { ValidateEmailComponent }               from './validation/validateEmail.component';
 import { ValidatingComponent }                  from './validation/validating.component';
 import { ResetPasswordComponent }               from './passwordReset/resetPassword/resetPassword.component';
@@ -46,6 +47,7 @@ import { AppRoutingModule }                     from './app-routing.module';
     ValidatingComponent,
     ResetPasswordComponent,
     ForgotPasswordComponent,
+    AddUserComponent,
   ],
   providers: [
     AuthService,
