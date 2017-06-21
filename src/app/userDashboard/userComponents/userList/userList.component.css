@@ -47,6 +47,6 @@
     cursor: pointer;
 }
 
-.userList-user:focused {
+.userList-user:focus {
     background: lightblue;
 }

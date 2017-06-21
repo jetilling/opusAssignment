@@ -14,13 +14,26 @@ import { UsersService }         from './../../services/users.service';
 export class AddUserComponent
 {
 
+  model: any = {};
+  emailExists: boolean = false;
+
   constructor(private usersService: UsersService) { }
 
-  addUser() {
-    this.usersService.addUser();
+  get userSuccessfullyAdded(): boolean {
+    return this.usersService.userSuccessfullyAdded;
   }
 
+  addUser() {
+    this.usersService.addUser(this.model);
+  }
 
+  cancel() {
+    this.usersService.showAddUser = false;
+  }
+
+  verifyEmail() {
+    this.emailExists = this.usersService.verifyEmail(this.model);
+  }
 
 
 
