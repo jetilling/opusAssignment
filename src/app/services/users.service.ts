@@ -1,60 +1,3 @@
-namespace Opus
-{
-  export interface IUsersService
-  {
-     /**
-      * Logged in user information
-      */
-     currentUser: UsersObject
-
-     /**
-      * Current User Info is loaded
-      */
-     currentUserInfoLoaded: boolean
-
-     /**
-      * List of all users
-      */
-     allUsers: UsersObject[]
-
-     /**
-      * Pagination Object
-      */
-     pagerDetails: PagerDetails
-
-     /**
-      * List of current users on the page
-      */
-     pagedUsers: UsersObject[]
-
-     /**
-      * Current Page
-      */
-      currentPage: number
-
-     /**
-      * Show the confirm-delete modal
-      */
-     showConfirmDelete: boolean
-
-     /**
-      * Id of selected user
-      */
-     selectedUserId: number
-
-     /**
-      * Retrieves User list
-      */
-     getUsers: () => void
-
-     /**
-      * Sets a new page
-      */
-     setPage: (page: number) => void
-
-  }
-}
-
 import { Injectable, OnInit }                               from '@angular/core';
 import { Http, Headers, RequestOptions, Response }          from '@angular/http';
 import { User, UsersObject, PagerDetails }                  from '../interfaces';
@@ -65,7 +8,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
 @Injectable()
-export class UsersService implements Opus.IUsersService
+export class UsersService
 {
 
   constructor(private http: Http,

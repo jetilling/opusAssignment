@@ -51,14 +51,13 @@ function ensureAuthenticated(req, res, next) {
   req.user = payload.sub;
   next();
 }
-function doStuff(req, res, next){
-  console.log('stuff: ', req.body.token)
-  next();
-}
+
 //----Endpoints----//
 //----authCtrl----//
 app.get('/api/me/', ensureAuthenticated, authCtrl.getMe);
-app.put('/auth/validate', doStuff, authCtrl.validateUser);
+app.put('/auth/validate', authCtrl.validateUser);
+app.put('/auth/sendPasswordResetUrl', authCtrl.sendPasswordResetUrl);
+app.put('/auth/resetPassword', authCtrl.resetPassword);
 app.post('/auth/login', authCtrl.login);
 app.post('/auth/register', authCtrl.register);
 

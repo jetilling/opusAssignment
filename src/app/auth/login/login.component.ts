@@ -1,7 +1,10 @@
+//----Angular Imports----//
 import { Component }                             from '@angular/core';
 import {FormBuilder, FormControl, Validators, FormGroup} from '@angular/forms';
 import { Router }                                          from '@angular/router';
 import { User }                                            from '../../interfaces';
+
+//----Other Imports----//
 import { AuthService }                                   from '../../services/auth.service';
 
 
@@ -14,17 +17,22 @@ import { AuthService }                                   from '../../services/au
 })
 
 export class LoginComponent {
-  model: User | any = {};
+  
+  model: User = <any>{};
   loading = false;
-  //opusUser: string = document.cookie.split("Opus_User=")[1];
 
   constructor(private auth: AuthService,
               private router: Router){}
 
+//----Properties----//
+  get showValidationMessage(): boolean {
+    return this.auth.showValidationMessage
+  }
+
+//----Methods----//
   login() {
     this.loading = true;
     this.auth.login(this.model)
   }
-
 
 }
