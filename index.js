@@ -64,6 +64,7 @@ app.post('/auth/register', authCtrl.register);
 //----User Ctrl----//
 app.get('/api/getUsers', ensureAuthenticated, userCtrl.getUsers)
 app.get('/api/getLoggedInUser/:id', ensureAuthenticated, userCtrl.getLoggedInUser)
+app.post('/api/addUser', ensureAuthenticated, userCtrl.addUser);
 app.delete('/api/deleteUser/:id', ensureAuthenticated, userCtrl.deleteUser);
 
 app.listen(process.env.PORT, function(){

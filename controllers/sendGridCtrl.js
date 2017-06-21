@@ -71,5 +71,15 @@ module.exports = {
       if (error) console.log('Error response received: ', error)
       else return response.statusCode
     });
+  },
+
+  sendNewUserEmail: function(userInfo) {
+
+    var request = createRequest(userInfo, "You've Been Added!", './emailTemplates/newUser.html')
+
+    sg.API(request, function (error, response) {
+      if (error) console.log('Error response received: ', error)
+      else return response.statusCode
+    });
   }
 }

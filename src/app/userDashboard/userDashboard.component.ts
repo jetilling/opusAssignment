@@ -53,6 +53,10 @@ export class UserDashboardComponent implements OnInit
     return this.usersService.showConfirmDelete
   }
 
+  get showAddUser(): boolean {
+    return this.usersService.showAddUser
+  }
+
 //--------Methods----------//
 
 /**
@@ -62,6 +66,10 @@ export class UserDashboardComponent implements OnInit
   {
     let loggedOut = this.auth.logout()
     if (loggedOut) this.router.navigate(['/login'])
+  }
+
+  showAddUserModal() {
+    this.usersService.showAddUser = true;
   }
 
 

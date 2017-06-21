@@ -20,10 +20,27 @@ export class UsersService
   pagerDetails: PagerDetails | any = {}
   pagedUsers: UsersObject[];
   currentPage: number;
+  showAddUser: boolean = false;
+  userSuccessfullyAdded: boolean = false;
   showConfirmDelete: boolean;
   selectedUserId: number;
 
   //--------Methods----------//
+
+  addUser(user: User) {
+    const url = '/api/addUser'
+    this.http.post(url, user, this.common.jwt())
+            .map(this.common.extractData)
+            .subscribe(
+                res => {
+                    console.log("res: ", res)
+                    console.log('user: ', user)
+                    this.allUsers.push(user);
+                    this.userSuccessfullyAdded = true;
+                    this.setPage(this.currentPage)
+                }
+            )
+  }
 
   getLoggedInUser()
   {
@@ -53,15 +70,6 @@ export class UsersService
             })
   }
 
-  private removeFromUsers(array: UsersObject[], value: number): UsersObject[] {
-    array.forEach(function(element, index){
-                        if (element.id === value) {
-                            array.splice(index, 1);
-                        }
-                    })
-    return array;
-  }
-
   getUsers() 
   {
     const url = '/api/getUsers'
@@ -83,6 +91,14 @@ export class UsersService
     if (this.pagerDetails && this.allUsers) {
         this.pagedUsers = this.allUsers.slice(this.pagerDetails.startIndex, this.pagerDetails.endIndex + 1);
     } 
+  }
+
+  verifyEmail(user: User): boolean {
+      let invalidEmail: boolean = false;
+      this.allUsers.forEach(function(element){
+          if (element.email === user.email) return invalidEmail = true;
+      })
+      return invalidEmail
   }
 
   private getPages(totalItems: number, currentPage: number = 1, pageSize: number = 5) {
@@ -125,6 +141,15 @@ export class UsersService
         endIndex: endIndex,
         pages: pages
     };
+  }
+
+  private removeFromUsers(array: UsersObject[], value: number): UsersObject[] {
+      array.forEach(function(element, index){
+                          if (element.id === value) {
+                              array.splice(index, 1);
+                          }
+                      })
+      return array;
   }
 
 }
