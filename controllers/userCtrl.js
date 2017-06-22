@@ -16,8 +16,13 @@ module.exports = {
                 var token = randToken.generate(16);
                 db.add_New_User([req.body.email, req.body.firstName, req.body.lastName, token], function(err, success){
                     if(err) console.log(err);
-                    else if (success) sendGridCtrl.sendNewUserEmail({email: req.body.email, firstName: req.body.firstName, token: token})
-                    res.status(200).send(true);
+                    else if (success) {
+                        sendGridCtrl.sendNewUserEmail({email: req.body.email, firstName: req.body.firstName, token: token})
+                        db.users.findOne({ email: req.body.email }, function (err, user){
+                            if (err) console.log(err)
+                            else res.status(200).send(user);
+                        })
+                    }
                 })
             }
         })

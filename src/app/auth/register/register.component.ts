@@ -1,6 +1,7 @@
 import { Component }    from '@angular/core';
 import { Router } from '@angular/router';
 
+import { IRegisterUser }    from '../../interfaces';
 import { AuthService} from '../../services/auth.service';
 
 @Component({
@@ -11,14 +12,13 @@ import { AuthService} from '../../services/auth.service';
 })
 
 export class RegisterComponent {
-  model: any = {};
+  model: IRegisterUser = <any>{};
   loginForm: boolean = true;
   RegisterForm: boolean = false;
   //opusUser: string = document.cookie.split("Opus_User=")[1];
 
-  constructor(
-      private router: Router,
-      private auth: AuthService) { }
+  constructor(private router: Router,
+              private auth: AuthService) { }
 
 
   switchForms() {

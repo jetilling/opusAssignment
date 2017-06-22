@@ -1,7 +1,7 @@
 import { Injectable }                               from '@angular/core';
 import {Router}                                     from '@angular/router';
 import { Http, Headers, RequestOptions, Response }  from '@angular/http';
-import { User, UsersObject, IEmail, IUser }     from '../interfaces';
+import { IRegisterUser, IUsersObject, IEmail, IUser }     from '../interfaces';
 import { CommonFunctions }                          from './commonFunctions.service';
 import { UsersService }                             from './users.service';
 import { Observable }                               from 'rxjs/Observable';
@@ -21,11 +21,11 @@ export class AuthService
               private common: CommonFunctions) {}  
 
 //----Properties----//
-  get currentUser(): UsersObject {
+  get currentUser(): IUsersObject {
     return this.usersService.currentUser
   }         
 
-  set currentUser(val: UsersObject) {
+  set currentUser(val: IUsersObject) {
     this.usersService.currentUser = val
   }
 
@@ -37,7 +37,7 @@ export class AuthService
         .catch(this.common.handleError);
   }
 
-  login(user: User){
+  login(user: IRegisterUser){
     const url = '/auth/login';
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
@@ -53,7 +53,7 @@ export class AuthService
         })
   }
 
-  register(user: User) {
+  register(user: IRegisterUser) {
     const url = '/auth/register';
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
@@ -61,6 +61,7 @@ export class AuthService
                     .map(this.common.extractData)
                     .subscribe(
                           res => {
+                            this.usersService.currentUser = res;
                             this.router.navigate(['/validate'])
                           },
                           error => {
@@ -75,13 +76,24 @@ export class AuthService
     return true;
   }
 
-  validateUser(token: string, login?: boolean) {
+  validateUser(token: string) {
     this.userToken = token;
-    let validationObject = {token: token, login: login}
+    let validationToken = {token: token}
     const url = '/auth/validate';
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
-    return this.http.put(url, JSON.stringify(validationObject), options)
+    return this.http.put(url, JSON.stringify(validationToken), options)
+                  .map(this.common.extractData)
+                  .catch(this.common.handleError);
+  }
+
+    validateUserAndLogin(token: string) {
+    this.userToken = token;
+    let validationToken = {token: token}
+    const url = '/auth/validateAndLogin';
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    return this.http.put(url, JSON.stringify(validationToken), options)
                   .map(this.common.extractData)
                   .catch(this.common.handleError);
   }
@@ -111,7 +123,7 @@ export class AuthService
                   })
   }
 
- setCookies(res: User, newUser: boolean) {
+ setCookies(res: IRegisterUser, newUser: boolean) {
     if (res && res.token) {
       document.cookie = `Opus_User=${res.token}; Path=/;`
       localStorage.setItem('opusId', res.id+'');

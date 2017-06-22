@@ -19,7 +19,7 @@ export class ValidatingComponent implements OnInit {
 
   ngOnInit() {
     this.route.params
-    .switchMap((params: Params) => this.auth.validateUser(params['token'], true))
+    .switchMap((params: Params) => this.auth.validateUserAndLogin(params['token']))
     .subscribe((res) => {
       if (res) 
         this.auth.setCookies(res, false)

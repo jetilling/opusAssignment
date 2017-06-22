@@ -56,6 +56,7 @@ function ensureAuthenticated(req, res, next) {
 //----authCtrl----//
 app.get('/api/me/', ensureAuthenticated, authCtrl.getMe);
 app.put('/auth/validate', authCtrl.validateUser);
+app.put('/auth/validateAndLogin', authCtrl.validateUserAndLogin);
 app.put('/auth/sendPasswordResetUrl', authCtrl.sendPasswordResetUrl);
 app.put('/auth/resetPassword', authCtrl.resetPassword);
 app.post('/auth/login', authCtrl.login);

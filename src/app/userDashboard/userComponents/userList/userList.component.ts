@@ -2,7 +2,7 @@
 import { Component, OnInit }                  from '@angular/core';
 
 //--------Other Imports----------//
-import { PagerDetails, UsersObject }          from '../../../interfaces';
+import { IPagerDetails, IUsersObject }          from '../../../interfaces';
 import { UsersService }                       from '../../../services/users.service';
 
 @Component({
@@ -24,11 +24,11 @@ export class UserListComponent implements OnInit
     this.usersService.getUsers();
   }
 
-  get pagedUsers(): UsersObject[] {
+  get pagedUsers(): IUsersObject[] {
     return this.usersService.pagedUsers
   }
 
-  get pagerDetails(): PagerDetails {
+  get pagerDetails(): IPagerDetails {
     return this.usersService.pagerDetails
   }
 
@@ -45,9 +45,10 @@ export class UserListComponent implements OnInit
     this.usersService.showConfirmDelete = true;
   }
 
-  selectUser(id: number)
+  selectUser(id: number, firstName: string, lastName: string)
   {
-    this.usersService.selectedUserId = id
+    this.usersService.selectedUserId = id;
+    this.usersService.selectedUserName = {firstName: firstName, lastName: lastName};
   }
 
 }
