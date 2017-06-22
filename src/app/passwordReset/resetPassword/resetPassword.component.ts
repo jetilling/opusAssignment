@@ -52,7 +52,6 @@ export class ResetPasswordComponent implements OnInit {
         this.auth.resetPassword(this.model)
       }
     }
-    else {} //do something!!!!!!!!!!!!!!!!!!!!!!!!!!!
   }
     
 

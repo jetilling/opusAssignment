@@ -3,7 +3,8 @@ var app = require('../index'),
     config = require('../config.json'),
     moment = require('moment'),
     randToken = require('rand-token'),
-    sendGridCtrl = require('./sendGridCtrl.js');
+    sendGridCtrl = require('./sendGridCtrl.js'),
+    postMarkCtrl = require('./postMarkCtrl.js');
 
 module.exports = {
 
@@ -17,7 +18,8 @@ module.exports = {
                 db.add_New_User([req.body.email, req.body.firstName, req.body.lastName, token], function(err, success){
                     if(err) console.log(err);
                     else if (success) {
-                        sendGridCtrl.sendNewUserEmail({email: req.body.email, firstName: req.body.firstName, token: token})
+                        if (process.env.USE_SENDGRID) sendGridCtrl.sendNewUserEmail({email: req.body.email, firstName: req.body.firstName, token: token})
+                        else if (process.env.USE_POSTMARK) postMarkCtrl.sendNewUserEmail({email: req.body.email, firstName: req.body.firstName, token: token})
                         db.users.findOne({ email: req.body.email }, function (err, user){
                             if (err) console.log(err)
                             else res.status(200).send(user);

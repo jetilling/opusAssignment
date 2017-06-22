@@ -1,25 +1,26 @@
-<div class="addUser-main">
-      <h2 class="addUser-title">addUser 'n Stuff</h2>
+<section class="addUser-background" (click)="cancel()" ></section>
+  <div class="addUser-main">
+      <h2 class="addUser-title">Add A New User</h2>
       <form class="addUser-form" name="form" (ngSubmit)="f.form.valid && addUser()" #f="ngForm" novalidate>
           <div class="form-input" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
               <input class="field-input" type="text" name="email" [(ngModel)]="model.email" #email="ngModel" required (blur)="verifyEmail()"/>
               <label class="field-label" for="email">Email</label>
-              <div *ngIf="f.submitted && !email.valid" class="help-block">Email is required</div>
-              <div *ngIf="emailExists">A user with this Email already exists</div>
+              <div *ngIf="f.submitted && !email.valid" class="addUser-email-error">Email is required</div>
+              <div *ngIf="emailExists" class="addUser-emailExists">A user with this Email already exists</div>
           </div>
           <div class="form-input" [ngClass]="{ 'has-error': f.submitted && !firstName.valid }">
               <input class="field-input" type="text" name="firstName" [(ngModel)]="model.firstName" #firstName="ngModel" required />
               <label class="field-label" for="firstName">First Name</label>
-              <div *ngIf="f.submitted && !firstName.valid" class="help-block">First Name is required</div>
+              <div *ngIf="f.submitted && !firstName.valid" class="addUser-firstName-error">First Name is required</div>
           </div>
           <div class="form-input" [ngClass]="{ 'has-error': f.submitted && !lastName.valid }">
               <input class="field-input" type="text" name="lastName" [(ngModel)]="model.lastName" #lastName="ngModel" required />
               <label class="field-label" for="lastName">Last Name</label>
-              <div *ngIf="f.submitted && !lastName.valid" class="help-block">Last Name is required</div>
+              <div *ngIf="f.submitted && !lastName.valid" class="addUser-lastName-error">Last Name is required</div>
           </div>
-          <div class="addUser-button">
-              <button [disabled]="loading" class="btn btn-primary">Add User</button>
-              <button (click)="cancel()">Close</button>
+          <div>
+              <button [disabled]="loading" class="addUser-button" >Add User</button>
+              <button (click)="cancel()" class="addUser-close-button">Close</button>
           </div>
           <div>
               <p *ngIf="userSuccessfullyAdded">User Successfully Added</p>

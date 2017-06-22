@@ -149,3 +149,10 @@
 .login-forgot-link:hover {
     text-decoration: underline;
 }
+
+.login-email-error,
+.login-password-error {
+  font-family: 'Merriweather Sans', sans-serif;
+  margin-top: 5px;
+  font-size: 11px;
+}

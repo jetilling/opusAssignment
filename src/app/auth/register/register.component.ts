@@ -19,6 +19,9 @@ export class RegisterComponent {
   constructor(private router: Router,
               private auth: AuthService) { }
 
+  get emailIsAlreadyTaken(): boolean {
+    return this.auth.emailIsAlreadyTaken;
+  }
 
   switchForms() {
     this.loginForm = false;

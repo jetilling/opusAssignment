@@ -16,12 +16,15 @@ export class ConfirmDeleteComponent
 
   constructor(private usersService: UsersService) { }
 
+  get userName(): string {
+    return this.usersService.selectedUserName.firstName
+  }
+
   get userId(): number {
     return this.usersService.selectedUserId
   }
 
   confirmDelete() {
-    console.log(this.userId)
     this.usersService.deleteUser(this.userId)
   }
 

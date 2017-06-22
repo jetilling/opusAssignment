@@ -39,9 +39,10 @@ export class UserListComponent implements OnInit
     this.usersService.setPage(page)
   }
 
-  confirmDelete(id: number) 
+  confirmDelete(id: number, firstName: string) 
   {
     this.usersService.selectedUserId = id;
+    this.usersService.selectedUserName = {firstName: firstName};
     this.usersService.showConfirmDelete = true;
   }
 

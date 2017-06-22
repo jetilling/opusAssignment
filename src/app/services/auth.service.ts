@@ -1,10 +1,13 @@
-import { Injectable }                               from '@angular/core';
-import {Router}                                     from '@angular/router';
-import { Http, Headers, RequestOptions, Response }  from '@angular/http';
-import { IRegisterUser, IUsersObject, IEmail, IUser }     from '../interfaces';
-import { CommonFunctions }                          from './commonFunctions.service';
-import { UsersService }                             from './users.service';
-import { Observable }                               from 'rxjs/Observable';
+//----Angular Imports----//
+import { Injectable }                                   from '@angular/core';
+import {Router}                                         from '@angular/router';
+import { Http, Headers, RequestOptions, Response }      from '@angular/http';
+
+//----Other Imports----//
+import { IRegisterUser, IUsersObject, IEmail, IUser }   from '../interfaces';
+import { CommonFunctions }                              from './commonFunctions.service';
+import { UsersService }                                 from './users.service';
+import { Observable }                                   from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
@@ -14,6 +17,8 @@ export class AuthService
 
   userToken: string;
   showValidationMessage: boolean = false;
+  emailIsAlreadyTaken: boolean;
+  emailOrPasswordInvalid: boolean;
 
   constructor(private http: Http,
               private router: Router,
@@ -45,11 +50,15 @@ export class AuthService
           .map(this.common.extractData)
           .subscribe(
               res => {
-                if (res.message) this.showValidationMessage = true;
-                else this.setCookies(res, false)
+                this.setCookies(res, false)
               },
-              error => {
-                this.common.handleError
+              err => {
+                if (err.status === 401) {
+                  this.emailOrPasswordInvalid = true;
+                }
+                else if (err.status === 400) {
+                  this.showValidationMessage = true;
+                }
         })
   }
 
@@ -64,8 +73,10 @@ export class AuthService
                             this.usersService.currentUser = res;
                             this.router.navigate(['/validate'])
                           },
-                          error => {
-                            this.common.handleError
+                          err => {
+                            if (err.status === 409) {
+                              this.emailIsAlreadyTaken = true;
+                            }
                     })
   }
 

@@ -4,7 +4,7 @@
 
   export interface IUserNames {
     firstName: string
-    lastName: string
+    lastName?: string
   }
 
   export interface IUser extends IRegisterUser {

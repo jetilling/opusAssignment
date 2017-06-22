@@ -10,7 +10,7 @@
     border-radius: 10px 0px 0px 10px;
     box-shadow: 10px 10px 5px #888888;
     padding: 10px;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Merriweather Sans', sans-serif;
 }
 
 .userList-main h1 {
@@ -29,7 +29,7 @@
     width: 5vw;
     outline: none;
     border: none;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Merriweather Sans', sans-serif;
     font-size: 15px;
     background: none;
 }
@@ -39,11 +39,37 @@
 }
 
 .activePage {
-    background: red;
+    background: #D8A2A1;
+    border-radius: 2px;
 }
 
 .userList-user:hover {
-    background: lightblue;
+    background: #D8A2A1;
     cursor: pointer;
 }
 
+.userList-users {
+    width: 35vw;
+}
+
+.userList-user {
+    display: flex;
+    justify-content: space-around;
+}
+
+.userList-name {
+
+}
+
+.userList-delete-button {
+    outline: none;
+    text-decoration: none;
+    font-family: 'Merriweather Sans', sans-serif;
+    border: none;
+    background: transparent;
+    font-size: 15px;
+}
+
+.userList-delete-button:hover {
+    text-decoration: underline;
+}

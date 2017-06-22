@@ -4,7 +4,8 @@ var app = require('../index'),
     jwt = require('jwt-simple'),
     bcrypt = require('bcrypt-nodejs'),
     randToken = require('rand-token'),
-    sendGridCtrl = require('./sendGridCtrl.js');
+    sendGridCtrl = require('./sendGridCtrl.js'),
+    postMarkCtrl = require('./postMarkCtrl.js');
 
 function createJWT(user) {
   var payload = {
@@ -42,7 +43,7 @@ module.exports = {
             message: 'Invalid email and/or password'
           })
         }
-        else if (!user.validated) return res.send({
+        else if (!user.validated) return res.status(400).send({
             message: 'User is not validated'
         })
         else if (user) {
@@ -74,7 +75,8 @@ module.exports = {
             if (err) { return next(err); }
             db.register_user([req.body.email, hash, req.body.firstName, req.body.lastName, token], function(err, users){
               db.users.findOne({email: req.body.email}, function(err, user){
-                if (user) sendGridCtrl.sendValidationEmail({email: user.email, firstName: user.first_name, token: token});
+                if (user && process.env.USE_SENDGRID) sendGridCtrl.sendValidationEmail({email: user.email, firstName: user.first_name, token: token});
+                else if(user && process.env.USE_POSTMARK) postMarkCtrl.sendValidationEmail({email: user.email, firstName: user.first_name, token: token});
                 res.send( getSafeUser(user) );
               })
             })
@@ -114,7 +116,8 @@ module.exports = {
     var token = randToken.generate(16);
     db.set_New_Validation_Token([req.body.email, token], function(err, success){
       if (err) console.log(err)
-      else if (success) sendGridCtrl.sendPasswordResetEmail({email: req.body.email, token: token})
+      else if (success && process.env.USE_SENDGRID) sendGridCtrl.sendPasswordResetEmail({email: req.body.email, token: token});
+      else if (success && process.env.USE_POSTMARK) postMarkCtrl.sendPasswordResetEmail({email: req.body.email, token: token});
       res.status(200).send(true);
     })
   },
@@ -128,7 +131,8 @@ module.exports = {
           if (err) console.log(err)
           db.users.findOne({validation_token: req.body.token}, function(err, user){
             if(err) console.log(err)
-            else if (user) sendGridCtrl.sendPasswordChangedEmail({email: user.email, firstName: user.first_name})
+            else if (user && process.env.USE_SENDGRID) sendGridCtrl.sendPasswordChangedEmail({email: user.email, firstName: user.first_name})
+            else if (user && process.env.USE_POSTMARK) postMarkCtrl.sendPasswordChangedEmail({email: user.email, firstName: user.first_name})
             res.status(200).send(user)
           })
         })
