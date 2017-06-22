@@ -89,7 +89,14 @@ module.exports = {
   validateUser: function(req, res) {
     db.validate_email([req.body.token], function(err, success) {
       if(err) console.log("Error: ", err)
-      else if (req.body.login) {
+      else res.status(200).send(success)
+    })
+  },
+
+  validateUserAndLogin: function(req, res) {
+    db.validate_email([req.body.token], function(err, success) {
+      if(err) console.log("Error: ", err)
+      else {
         db.users.findOne({ validation_token: req.body.token }, function(err, user) {
           if (user) {
               db.add_login_date([user.id], function(err){
@@ -100,7 +107,6 @@ module.exports = {
           else res.status(500).send({message: 'No such token exists'})
         })
       }
-      else res.status(200).send(success);
     })
   },
 

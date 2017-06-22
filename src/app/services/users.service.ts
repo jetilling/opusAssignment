@@ -1,6 +1,6 @@
 import { Injectable, OnInit }                               from '@angular/core';
 import { Http, Headers, RequestOptions, Response }          from '@angular/http';
-import { User, UsersObject, PagerDetails }                  from '../interfaces';
+import { IRegisterUser, IUsersObject, IPagerDetails, IUserNames }                  from '../interfaces';
 import { CommonFunctions }                                  from './commonFunctions.service';
 import { Observable }                                       from 'rxjs/Observable';
 import * as _                                               from 'underscore';
@@ -14,28 +14,27 @@ export class UsersService
   constructor(private http: Http,
               private common: CommonFunctions) {}
   
-  currentUser: UsersObject
+  currentUser: IUsersObject
   currentUserInfoLoaded: boolean = false;
-  allUsers: UsersObject[]
-  pagerDetails: PagerDetails | any = {}
-  pagedUsers: UsersObject[];
+  allUsers: IUsersObject[]
+  pagerDetails: IPagerDetails | any = {}
+  pagedUsers: IUsersObject[];
   currentPage: number;
   showAddUser: boolean = false;
   userSuccessfullyAdded: boolean = false;
   showConfirmDelete: boolean;
   selectedUserId: number;
+  selectedUserName: IUserNames;
 
   //--------Methods----------//
 
-  addUser(user: User) {
+  addUser(user: IUsersObject) {
     const url = '/api/addUser'
     this.http.post(url, user, this.common.jwt())
             .map(this.common.extractData)
             .subscribe(
                 res => {
-                    console.log("res: ", res)
-                    console.log('user: ', user)
-                    this.allUsers.push(user);
+                    this.allUsers.push(res);
                     this.userSuccessfullyAdded = true;
                     this.setPage(this.currentPage)
                 }
@@ -75,7 +74,7 @@ export class UsersService
     const url = '/api/getUsers'
     this.http.get(url, this.common.jwt())
             .map(this.common.extractData)
-            .subscribe((res: UsersObject[]) => {
+            .subscribe((res: IUsersObject[]) => {
                 this.allUsers = res;
                 this.setPage(1);
             });
@@ -93,7 +92,7 @@ export class UsersService
     } 
   }
 
-  verifyEmail(user: User): boolean {
+  verifyEmail(user: IRegisterUser): boolean {
       let invalidEmail: boolean = false;
       this.allUsers.forEach(function(element){
           if (element.email === user.email) return invalidEmail = true;
@@ -143,7 +142,7 @@ export class UsersService
     };
   }
 
-  private removeFromUsers(array: UsersObject[], value: number): UsersObject[] {
+  private removeFromUsers(array: IUsersObject[], value: number): IUsersObject[] {
       array.forEach(function(element, index){
                           if (element.id === value) {
                               array.splice(index, 1);

@@ -2,18 +2,20 @@
     email: string
   }
 
-  export interface IUser extends User {
+  export interface IUserNames {
+    firstName: string
+    lastName: string
+  }
+
+  export interface IUser extends IRegisterUser {
     password: string
     verifyPassword: string
-    token: string
-    email: string
-    firstName: string
   }
 
 /**
  * Class for login/Register User object
  */
-export class User {
+export interface IRegisterUser {
     id: number;
     email: string;
     firstName: string;
@@ -25,7 +27,7 @@ export class User {
 /**
  * Class for Users list
  */
-export class UsersObject {
+export interface IUsersObject {
     id: number;
     email: string;
     firstName: string;
@@ -36,7 +38,7 @@ export class UsersObject {
 /**
  * Class for Pagination Details
  */
-export class PagerDetails {
+export interface IPagerDetails {
     totalItems: number;
     currentPage: number;
     pageSize: number;

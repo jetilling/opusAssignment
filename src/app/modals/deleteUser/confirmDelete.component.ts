@@ -21,6 +21,7 @@ export class ConfirmDeleteComponent
   }
 
   confirmDelete() {
+    console.log(this.userId)
     this.usersService.deleteUser(this.userId)
   }
 

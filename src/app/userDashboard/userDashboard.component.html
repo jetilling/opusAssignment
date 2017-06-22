@@ -1,5 +1,5 @@
 <header class="dashboard-header">
-    <h1>Welcome Back<span  *ngIf="currentUserInfoLoaded">, {{currentUserInfo.first_name}}!</span></h1>
+    <h1>Welcome<span  *ngIf="currentUserInfoLoaded">, {{currentUserInfo.first_name}}!</span></h1>
     <button (click)="showAddUserModal()">Add User</button>
     <button class="dashboard-logout-button" type="button" name="button" (click)="logout()">Log out</button>
 </header>

@@ -45,11 +45,15 @@ export class ResetPasswordComponent implements OnInit {
 
 //----Methods----//
   resetPassword() {
-    if (this.model.password === this.model.verifyPassword) {
-      this.model.token = this.userToken
-      this.auth.resetPassword(this.model)
+    if (this.model.password.length >= 8) {
+      if (this.model.password === this.model.verifyPassword) {
+        this.model.token = this.userToken
+        this.auth.resetPassword(this.model)
+      }
     }
+    else {} //do something!!!!!!!!!!!!!!!!!!!!!!!!!!!
   }
+    
 
 
 }

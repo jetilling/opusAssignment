@@ -2,7 +2,7 @@
 import { Component }                             from '@angular/core';
 import {FormBuilder, FormControl, Validators, FormGroup} from '@angular/forms';
 import { Router }                                          from '@angular/router';
-import { User }                                            from '../../interfaces';
+import { IRegisterUser }                                            from '../../interfaces';
 
 //----Other Imports----//
 import { AuthService }                                   from '../../services/auth.service';
@@ -18,7 +18,7 @@ import { AuthService }                                   from '../../services/au
 
 export class LoginComponent {
   
-  model: User = <any>{};
+  model: IRegisterUser = <any>{};
   loading = false;
 
   constructor(private auth: AuthService,

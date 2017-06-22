@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 //--------Other Imports----------//
-import { UsersObject }          from '../interfaces';
+import { IUsersObject }          from '../interfaces';
 import { AuthService}           from '../services/auth.service';
 import { UsersService }         from '../services/users.service';
 
@@ -41,7 +41,7 @@ export class UserDashboardComponent implements OnInit
     else this.router.navigate(['/login'])
   }
 
-  get currentUserInfo(): UsersObject {
+  get currentUserInfo(): IUsersObject {
     return this.usersService.currentUser
   }
 

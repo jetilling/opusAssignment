@@ -18,8 +18,8 @@ const routes: Routes = [
   { path: 'validate', component: ValidateEmailComponent },
   { path: 'validating', redirectTo: '/register', pathMatch: 'full'},
   { path: 'validating/:token', component: ValidatingComponent },
-  { path: 'resetPassword', redirectTo: '/login', pathMatch: 'full'},
-  { path: 'resetPassword/:token', component: ResetPasswordComponent },
+  { path: 'setPassword', redirectTo: '/login', pathMatch: 'full'},
+  { path: 'setPassword/:token', component: ResetPasswordComponent },
   { path: 'forgotPassword', component: ForgotPasswordComponent }
 ];
 
