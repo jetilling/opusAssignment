@@ -1,11 +1,13 @@
 <header class="dashboard-header">
     <h1>Welcome<span  *ngIf="currentUserInfoLoaded">, {{currentUserInfo.first_name}}!</span></h1>
-    <button (click)="showAddUserModal()">Add User</button>
-    <button class="dashboard-logout-button" type="button" name="button" (click)="logout()">Log out</button>
+    <div class="dashboard-buttons">
+        <button class="dashboard-addUser-button" (click)="showAddUserModal()">Add User</button>
+        <button class="dashboard-logout-button" type="button" name="button" (click)="logout()">Log out</button>
+    </div>
 </header>
 <section class="dashboard-main">
-    <add-user *ngIf="showAddUser"></add-user>
-    <confirm-delete *ngIf="showConfirmDelete"></confirm-delete>
+    <add-user class="addUser" *ngIf="showAddUser"></add-user>
+    <confirm-delete class="confirmDelete" *ngIf="showConfirmDelete"></confirm-delete>
     <user-list *ngIf="userList"></user-list>
     <user-details *ngIf="userList"></user-details>
 </section>

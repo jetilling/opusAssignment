@@ -2,17 +2,19 @@
     width: 100vw;
     height: 10vh;
     border-bottom: 1px solid black;
-    box-shadow: 10px 10px 5px #888888;
+    box-shadow: 1px 11px 12px #888888;
     background: mintcream;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding-left: 5vw;
     padding-right: 5vw;
+    position: relative;
+    z-index: 10;
 }
 
 .dashboard-header h1 {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Merriweather Sans', sans-serif;
     font-size: 20px;
 }
 
@@ -23,4 +25,40 @@
     justify-content: center;
     align-items: center;
     background: #869E9C;
+}
+
+.dashboard-addUser-button,
+.dashboard-logout-button {
+    outline: none;
+    text-decoration: none;
+    font-family: 'Merriweather Sans', sans-serif;
+    border: none;
+    background: transparent;
+    font-size: 14px;
+}
+
+.dashboard-addUser-button:hover {
+    font-size: 15px;
+    text-decoration: underline;
+}
+
+.dashboard-logout-button:hover {
+    font-size: 15px;
+    text-decoration: underline;
+}
+
+.addUser {
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.confirmDelete {
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

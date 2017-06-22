@@ -3,18 +3,21 @@
     <div *ngIf="showValidationMessage">
         Please check your email for a validation link!
     </div>
+    <div *ngIf="emailOrPasswordInvalid">
+        Invalid email and/or password
+    </div>
     <div class="login">
         <h2 class="login-title">Login</h2>
         <form class="login-form" name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
             <div class="login-email" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
                 <input type="text" class="login-email-input" name="email" [(ngModel)]="model.email" #email="ngModel" required />
                 <label class="login-email-label" for="email">Email</label>
-                <div *ngIf="f.submitted && !email.valid" class="help-block">Email is required</div>
+                <div *ngIf="f.submitted && !email.valid" class="login-email-error">Email is required</div>
             </div>
             <div class="login-password" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
                 <input type="password" class="login-password-input" name="password" [(ngModel)]="model.password" #password="ngModel" required />
                 <label class="login-password-label" for="password">Password</label>
-                <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
+                <div *ngIf="f.submitted && !password.valid" class="login-password-error">Password is required</div>
             </div>
             <div class="">
                 <button [disabled]="loading" class="login-button">Login</button>

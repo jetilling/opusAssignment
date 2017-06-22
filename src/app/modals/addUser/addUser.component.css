@@ -1,8 +1,99 @@
+.addUser-background {
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  opacity: .5;
+  position: absolute;
+  top: 0;
+  z-index: 200;
+}
+
 .addUser-main {
-  width: 30vw;
-  height: 30vh;
-  background: lightgray;
-  position: fixed;
-  top: 30vh;
-  left: 30vw;
+  position: relative;
+  top: 25vh;
+  z-index: 220;
+  background: mintcream;
+  width: 50vw;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  box-shadow: 10px 10px 10px #3D4148;
+}
+
+.addUser-title {
+  font-family: 'Merriweather Sans', sans-serif;
+  font-size: 20px;
+}
+
+.addUser-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-input {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.field-input {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid black;
+  font-family: 'Merriweather Sans', sans-serif;
+  font-size: 14px;
+  outline: none;
+  width: 20vw;
+  height: 4vh;
+  background: transparent;
+  transition: background-color 0.5s;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+}
+
+.field-input:focus {
+  background-color: #D8A2A1;
+  border-bottom: 2px solid black;
+}
+
+.field-input:valid {
+  background-color: #B0E5AF;
+}
+
+.addUser-firstName-error,
+.addUser-lastName-error,
+.addUser-email-error {
+  font-family: 'Merriweather Sans', sans-serif;
+  margin-top: 5px;
+  font-size: 11px;
+}
+
+.field-label {
+  font-family: 'Merriweather Sans', sans-serif;
+}
+
+.addUser-button,
+.addUser-close-button {
+  border: none;
+  outline: none;
+  font-family: 'Merriweather Sans', sans-serif;
+  font-size: 14px;
+  width: 8vw;
+  height: 5vh;
+  background: #D8A2A1;
+  border-radius: 2px;
+  margin: 20px;
+}
+
+.addUser-button:hover {
+    background: #D67F7E;
+}
+
+.addUser-close-button:hover {
+   background: #D67F7E;
 }

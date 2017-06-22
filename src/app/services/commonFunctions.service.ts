@@ -1,3 +1,4 @@
+//----Angular Imports----//
 import { Injectable }                               from '@angular/core';
 import { Headers, RequestOptions, Response }        from '@angular/http';
 import { Observable }                               from 'rxjs/Observable';
@@ -5,19 +6,28 @@ import { Observable }                               from 'rxjs/Observable';
 @Injectable()
 export class CommonFunctions {
 
+  /**
+   * Sets the JSON web token in the request header
+   */
   jwt() {
-       let tellTovaUser = document.cookie.split("Opus_User=")[1];
-       if (tellTovaUser && tellTovaUser.split('.').length === 3) {
-           let headers = new Headers({ 'Authorization': tellTovaUser});
+       let opusUser = document.cookie.split("Opus_User=")[1];
+       if (opusUser && opusUser.split('.').length === 3) {
+           let headers = new Headers({ 'Authorization': opusUser});
            return new RequestOptions({ headers: headers });
        }
   }
 
+  /**
+   * Formats response from server
+   */
   extractData(res: Response) {
     let body = res.json();
     return body || { };
   }
 
+  /**
+   * Error handling
+   */
   handleError (error: Response | any) {
     let errMsg: string;
     if (error instanceof Response) {

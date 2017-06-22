@@ -1,5 +1,8 @@
+<div class="confirmDelete-background"></div>
 <section class="confirmDelete-main">
-  {{userId}}
-  <button (click)="confirmDelete()">Delete User</button>
-  <button (click)="cancel()">Cancel</button>
+  <div class="confirmDelete-text">Are you sure you want to delete {{userName}}</div>
+  <div>
+     <button class="confirmDelete-delete-button" (click)="confirmDelete()">Delete User</button>
+    <button class="confirmDelete-cancel-button" (click)="cancel()">Cancel</button>
+  </div>
 </section>

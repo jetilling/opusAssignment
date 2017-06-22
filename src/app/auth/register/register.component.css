@@ -76,6 +76,12 @@
   font-size: 11px;
 }
 
+.form-email-taken {
+  font-family: 'Merriweather Sans', sans-serif;
+  margin-top: 5px;
+  font-size: 11px;
+}
+
 .field-label {
   font-family: 'Merriweather Sans', sans-serif;
 }

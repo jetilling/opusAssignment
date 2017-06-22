@@ -29,6 +29,10 @@ export class LoginComponent {
     return this.auth.showValidationMessage
   }
 
+  get emailOrPasswordInvalid(): boolean {
+    return this.auth.emailOrPasswordInvalid;
+  }
+
 //----Methods----//
   login() {
     this.loading = true;

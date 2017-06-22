@@ -17,6 +17,7 @@
               <input class="field-input" type="text" name="email" [(ngModel)]="model.email" #email="ngModel" required />
               <label class="field-label" for="email">Email</label>
               <div *ngIf="f.submitted && !email.valid" class="form-email-error">Email is required</div>
+              <div *ngIf="emailIsAlreadyTaken" class="form-email-taken">Email already taken</div>
           </div>
           <div class="form-input" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
               <input class="field-input" type="password"name="password" minlength="8" [(ngModel)]="model.password" #password="ngModel" required />
