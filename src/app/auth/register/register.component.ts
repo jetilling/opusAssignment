@@ -15,7 +15,6 @@ export class RegisterComponent {
   model: IRegisterUser = <any>{};
   loginForm: boolean = true;
   RegisterForm: boolean = false;
-  //opusUser: string = document.cookie.split("Opus_User=")[1];
 
   constructor(private router: Router,
               private auth: AuthService) { }

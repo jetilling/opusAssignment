@@ -8,6 +8,7 @@ import { UsersService }   from '../services/users.service';
   moduleId: module.id,
   selector: 'validate-email',
   templateUrl: './validateEmail.component.html',
+  styleUrls: ['./validateEmail.component.css']
 })
 
 export class ValidateEmailComponent implements OnInit {
@@ -20,7 +21,9 @@ export class ValidateEmailComponent implements OnInit {
   }
 
   get email(): string {
-    if (this.usersService.currentUser.email) return this.usersService.currentUser.email
+    if (this.usersService.currentUser 
+        && this.usersService.currentUser.email) 
+        return this.usersService.currentUser.email
     return 'your email.'
   }
 

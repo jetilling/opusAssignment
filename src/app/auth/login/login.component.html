@@ -1,9 +1,10 @@
 <section class="main">
+    <h1 class="main-title">Opus Assignment</h1>
     <div *ngIf="showValidationMessage">
         Please check your email for a validation link!
     </div>
     <div class="login">
-        <h2 class="login-title">Login 'n Stuff</h2>
+        <h2 class="login-title">Login</h2>
         <form class="login-form" name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
             <div class="login-email" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
                 <input type="text" class="login-email-input" name="email" [(ngModel)]="model.email" #email="ngModel" required />
@@ -15,15 +16,15 @@
                 <label class="login-password-label" for="password">Password</label>
                 <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
             </div>
-            <div class="login-button">
-                <button [disabled]="loading" class="btn btn-primary">Login</button>
+            <div class="">
+                <button [disabled]="loading" class="login-button">Login</button>
             </div>
         </form>
 
-    </div>
+        <div class="login-links">
+            <a class="login-register-link"routerLink='/register' routerLinkActive="active">Don't have an account? Register here!</a>
+            <a class="login-forgot-link"routerLink='/forgotPassword' routerLinkActive="active">Forgot your password?</a>
+        </div>
 
-    <div>
-        <a routerLink='/register' routerLinkActive="active">Don't have an account? Register here!</a>
-        <a routerLink='/forgotPassword' routerLinkActive="active">Forgot your password?</a>
     </div>
 </section>

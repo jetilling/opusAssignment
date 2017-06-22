@@ -5,7 +5,147 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: url("../../images/landingBackground.jpg");
+    background: url("../../images/iceBackground.jpg");
     background-size: cover;
+}
 
+.main-title {
+    font-family: 'Merriweather Sans', sans-serif;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40vw;
+  height: 50vh;
+}
+
+.login-title {
+  font-family: 'Merriweather Sans', sans-serif;
+  font-size: 20px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-email {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-email-input {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid black;
+  font-family: 'Merriweather Sans', sans-serif;
+  font-size: 20px;
+  outline: none;
+  width: 20vw;
+  height: 5vh;
+  background: transparent;
+  transition: background-color 0.5s;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+}
+
+.login-email-input:focus {
+  background-color: #D8A2A1;
+  border-bottom: 2px solid black;
+}
+
+.login-email-input:valid {
+  background-color: #B0E5AF;
+}
+
+.login-email-label {
+  font-family: 'Merriweather Sans', sans-serif;
+}
+
+.login-password {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-password-input {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid black;
+  font-family: 'Merriweather Sans', sans-serif;
+  font-size: 20px;
+  outline: none;
+  width: 20vw;
+  height: 5vh;
+  background: transparent;
+  transition: background-color 0.5s;
+}
+
+.login-password-input:focus {
+  background-color: #D8A2A1;
+  border-bottom: 2px solid black;
+}
+
+.login-password-input:valid {
+  background-color: #B0E5AF;
+}
+
+.login-password-label {
+  font-family: 'Merriweather Sans', sans-serif;
+}
+
+.login-button {
+  border: none;
+  outline: none;
+  font-family: 'Merriweather Sans', sans-serif;
+  font-size: 14px;
+  width: 8vw;
+  height: 5vh;
+  background: #D8A2A1;
+  border-radius: 2px;
+  margin: 40px;
+}
+
+.login-button:hover {
+    background: #D67F7E;
+}
+
+.login-links {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Merriweather Sans', sans-serif;
+    font-size: 11px;
+    text-decoration: none;
+    color: black;
+}
+
+.login-register-link {
+    text-decoration: none;
+    color: black;
+    margin-bottom: 8px;
+}
+
+.login-forgot-link {
+    text-decoration: none;
+    color: black;
+    margin-bottom: 8px;
+}
+
+.login-register-link:hover {
+    text-decoration: underline;
+}
+
+.login-forgot-link:hover {
+    text-decoration: underline;
 }

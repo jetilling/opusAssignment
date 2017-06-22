@@ -9,6 +9,7 @@ import { AuthService }   from '../../services/auth.service';
   moduleId: module.id,
   selector: 'reset-password',
   templateUrl: './resetPassword.component.html',
+  styleUrls: ['./resetPassword.component.css']
 })
 
 export class ResetPasswordComponent implements OnInit {
