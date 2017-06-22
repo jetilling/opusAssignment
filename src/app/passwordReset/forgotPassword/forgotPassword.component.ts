@@ -8,6 +8,7 @@ import { AuthService }   from '../../services/auth.service';
   moduleId: module.id,
   selector: 'forgot-password',
   templateUrl: './forgotPassword.component.html',
+  styleUrls: ['./forgotPassword.component.css']
 })
 
 export class ForgotPasswordComponent implements OnInit {

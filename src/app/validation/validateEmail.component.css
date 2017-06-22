@@ -1,0 +1,22 @@
+.main {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: url("../../images/iceBackground.jpg");
+    background-size: cover;
+}
+
+.main-title {
+    font-family: 'Merriweather Sans', sans-serif;
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.main-subtitle {
+    font-family: 'Merriweather Sans', sans-serif;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
