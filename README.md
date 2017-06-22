@@ -53,7 +53,7 @@ http://localhost:6060/#/
 
 * Database - I thought the best way to demonstrate my understanding of building full stack application would be to do just that: build a full stack application. So, I decided to host my database rather than just use a JSON file (also, it was free). I populated the database with a lot of dummy data (for example: a@a.com, j@j.com, etc). The database has 8 columns: id (primary key), email, password (hashed and salted using bcrypt), first_name, last_name, validated (true/false), validation_token, and login_dates (array of timestamps). 
 
-![database image]('./src/images/db.jpg')
+![database image]('./src/images/db.png')
 
 ## Built With
 
