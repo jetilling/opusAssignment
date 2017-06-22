@@ -39,7 +39,7 @@ npm start
 Wait until you see "Listening on port 6060"
 ```
 
-Then pull it up in chrome
+Open it in chrome (or your browser in choice - I used chrome)
 
 ```
 http://localhost:6060/#/
