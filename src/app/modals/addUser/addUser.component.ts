@@ -14,24 +14,50 @@ import { UsersService }         from './../../services/users.service';
 export class AddUserComponent
 {
 
+  constructor(private usersService: UsersService) {}
+
+  //-------------Properties------------//
+
+  /**
+   * New User information
+   */
   model: any = {};
+
+  /**
+   * Email already exists if true
+   */
   emailExists: boolean = false;
 
-  constructor(private usersService: UsersService) { }
-
+  /**
+   * Confirmation that user was added
+   */
   get userSuccessfullyAdded(): boolean {
     return this.usersService.userSuccessfullyAdded;
   }
 
-  addUser() {
+  //--------------Methods-------------//
+
+  /**
+   * Sends new user's information to users Service to be added
+   */
+  addUser() 
+  {
     this.usersService.addUser(this.model);
   }
 
-  cancel() {
+  /**
+   * Closes Modal
+   */
+  cancel() 
+  {
     this.usersService.showAddUser = false;
   }
 
-  verifyEmail() {
+  /**
+   * Returns a boolean value if email already exists
+   */
+  verifyEmail() 
+  {
     this.emailExists = this.usersService.verifyEmail(this.model);
   }
 

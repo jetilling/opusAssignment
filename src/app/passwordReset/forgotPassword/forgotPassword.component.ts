@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+//----Angular Imports----//
+import { Component }                from '@angular/core';
+import { Router }                   from '@angular/router';
 
-import { AuthService }   from '../../services/auth.service';
+//----Other Imports----//
+import { AuthService }              from '../../services/auth.service';
 
 
 @Component({
@@ -11,25 +13,37 @@ import { AuthService }   from '../../services/auth.service';
   styleUrls: ['./forgotPassword.component.css']
 })
 
-export class ForgotPasswordComponent implements OnInit {
+export class ForgotPasswordComponent 
+{
 
-    model: any = {};
-    emailSent: boolean = false;
+  constructor(private auth: AuthService,
+              private router: Router){}
 
-    constructor(private auth: AuthService,
-                private router: Router){}
+  //------------Properties-------------//
+  
+  /**
+   * User's email taken from the form
+   */
+  model: any = {};
 
-  ngOnInit() {
-    
-  }
+  /**
+   * Show message saying an email was sent
+   */
+  emailSent: boolean = false;
 
-  submitEmail() {
+  //--------------Methods--------------//
+
+  /**
+   * Sends user's information to auth 
+   * Sets emailSent to true
+   */
+  submitEmail() 
+  {
     this.auth.submitResetEmail(this.model)
             .subscribe(
               res => {
                 this.emailSent = true;
               })
   }
-
 
 }
