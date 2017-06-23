@@ -1,9 +1,9 @@
 //----Angular Imports----//
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Component, OnInit }                    from '@angular/core';
+import { Router, ActivatedRoute, Params }       from '@angular/router';
 
 //----Other Imports----//
-import { AuthService }   from '../../services/auth.service';
+import { AuthService }                          from '../../services/auth.service';
 import 'rxjs/add/operator/switchMap';
 
 @Component({

@@ -53,19 +53,69 @@ function ensureAuthenticated(req, res, next) {
 }
 
 //----Endpoints----//
+
 //----authCtrl----//
+
+/**
+ * Retrieves logged in user id
+ */
 app.get('/api/me/', ensureAuthenticated, authCtrl.getMe);
+
+/**
+ * Finds matching validation token in db and sets validated to true
+ */
 app.put('/auth/validate', authCtrl.validateUser);
+
+/**
+ * Finds matching validation token in db and sets validated to true
+ * It then logs the user in
+ */
 app.put('/auth/validateAndLogin', authCtrl.validateUserAndLogin);
+
+/**
+ * Sends password reset url with random token to email address provided
+ */
 app.put('/auth/sendPasswordResetUrl', authCtrl.sendPasswordResetUrl);
+
+/**
+ * Changes password in db with new password provided
+ */
 app.put('/auth/resetPassword', authCtrl.resetPassword);
+
+/**
+ * Verifies there is a matching email in db and that the passwords match
+ */
 app.post('/auth/login', authCtrl.login);
+
+/**
+ * Verifies there is not a matching email in db and then populates
+ * password column, email column, first_name column, and last_name column
+ */
 app.post('/auth/register', authCtrl.register);
 
+
 //----User Ctrl----//
+
+/**
+ * Retrieves all the users in the database
+ */
 app.get('/api/getUsers', ensureAuthenticated, userCtrl.getUsers)
+
+/**
+ * Retrieves the user information for the logged in user. Searches db based on
+ * the id parameter
+ */
 app.get('/api/getLoggedInUser/:id', ensureAuthenticated, userCtrl.getLoggedInUser)
+
+/**
+ * Adds user to db then sends an email to that user with a validation token to 
+ * reset their password
+ */
 app.post('/api/addUser', ensureAuthenticated, userCtrl.addUser);
+
+/**
+ * Finds the user in the db with the mathcing id and deletes them
+ */
 app.delete('/api/deleteUser/:id', ensureAuthenticated, userCtrl.deleteUser);
 
 app.listen(process.env.PORT, function(){

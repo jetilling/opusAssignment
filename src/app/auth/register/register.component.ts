@@ -1,10 +1,10 @@
 //----Angular Imports----//
-import { Component }    from '@angular/core';
-import { Router } from '@angular/router';
+import { Component }                    from '@angular/core';
+import { Router }                       from '@angular/router';
 
 //----Other Imports----//
-import { IRegisterUser }    from '../../interfaces';
-import { AuthService} from '../../services/auth.service';
+import { IRegisterUser }                from '../../interfaces';
+import { AuthService}                   from '../../services/auth.service';
 
 @Component({
   moduleId: module.id,
