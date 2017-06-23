@@ -2,8 +2,8 @@
 import { Component }                  from '@angular/core';
 
 //--------Other Imports----------//
-import { IUserNames }                         from '../../../interfaces';
-import { UsersService }                       from '../../../services/users.service';
+import { IUserNames }                 from '../../../interfaces';
+import { UsersService }               from '../../../services/users.service';
 
 @Component({
   moduleId: module.id,
@@ -19,15 +19,27 @@ export class UserDetailsComponent
 
   constructor(private usersService: UsersService) { }
 
+  /**
+   * Name of the selected user
+   */
   get selectedUserName(): IUserNames {
     return this.usersService.selectedUserName;
   }
 
+  /**
+   * Id of the selected user
+   */
   get selectedUserId(): number {
     return this.usersService.selectedUserId
   }
 
-  loginDates = function(): any {
+  //------------Methods---------//
+
+  /**
+   * Retrieves the login dates of the selected user
+   */
+  loginDates = function(): any 
+  {
     let id = this.selectedUserId;
     let dates: Date[];
     let formattedDates: Date[] = [];
@@ -49,24 +61,4 @@ export class UserDetailsComponent
     return formattedDates;
   }
   
-  //get loginDates(): any {
-  //   let self = this;
-  //   let dates: Date[];
-  //   let formattedDates: Date[];
-  //   let users = this.usersService.allUsers;
-  //   users.some(function(element){
-  //     if (element.id === self.selectedUserId) { 
-  //       dates = element.login_dates 
-  //       if (dates) {
-  //         formattedDates = dates.map(function(element){
-  //           return new Date(element);
-  //         })
-  //       }
-  //       else return true
-  //     }
-  //   })
-  //   if (formattedDates) return formattedDates
-  //   else this.noLoginDates = true;
-  // }
-
 }

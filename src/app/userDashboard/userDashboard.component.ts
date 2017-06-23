@@ -1,11 +1,11 @@
 //--------Angular Imports---------//
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit }           from '@angular/core';
+import { Router }                      from '@angular/router';
 
 //--------Other Imports----------//
-import { IUsersObject }          from '../interfaces';
-import { AuthService}           from '../services/auth.service';
-import { UsersService }         from '../services/users.service';
+import { IUsersObject }                from '../interfaces';
+import { AuthService}                  from '../services/auth.service';
+import { UsersService }                from '../services/users.service';
 
 @Component({
   moduleId: module.id,
@@ -20,11 +20,9 @@ export class UserDashboardComponent implements OnInit
   constructor(private router: Router,
               private auth: AuthService,
               private usersService: UsersService) {}
-            
-  firstName: string;
-  userList: boolean = true;
-  opusUser: string = document.cookie.split("Opus_User=")[1];
 
+  opusUser: string = document.cookie.split("Opus_User=")[1];
+  
   ngOnInit() {
     if(this.opusUser && this.opusUser.split('.').length === 3){
     this.auth.getUser()
@@ -41,23 +39,47 @@ export class UserDashboardComponent implements OnInit
     else this.router.navigate(['/login'])
   }
 
+  //---------Properties----------//
+
+  /**
+   * User first name
+   */
+  firstName: string;
+
+  /**
+   * Show user List
+   */
+  userList: boolean = true;
+
+  /**
+   * Current user's information
+   */
   get currentUserInfo(): IUsersObject {
     return this.usersService.currentUser
   }
 
+  /**
+   * True is the current user's info is loaded
+   */
   get currentUserInfoLoaded(): boolean {
     return this.usersService.currentUserInfoLoaded
   }
 
+  /**
+   * True if showing confirm delete modal
+   */
   get showConfirmDelete(): boolean {
     return this.usersService.showConfirmDelete
   }
 
+  /**
+   * True if showing add user modal
+   */
   get showAddUser(): boolean {
     return this.usersService.showAddUser
   }
 
-//--------Methods----------//
+//-------------Methods----------------//
 
 /**
   * Logs user out
@@ -68,7 +90,11 @@ export class UserDashboardComponent implements OnInit
     if (loggedOut) this.router.navigate(['/login'])
   }
 
-  showAddUserModal() {
+  /**
+   * Shows add user modal
+   */
+  showAddUserModal() 
+  {
     this.usersService.showAddUser = true;
   }
 

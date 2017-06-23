@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+//----Angular Imports----//
+import { Component, OnInit }                    from '@angular/core';
+import { Router, ActivatedRoute, Params }       from '@angular/router';
+
+//----Other Imports----//
+import { AuthService }                          from '../services/auth.service';
 import 'rxjs/add/operator/switchMap';
-
-import { AuthService }   from '../services/auth.service';
-
 
 @Component({
   moduleId: module.id,
@@ -11,19 +12,20 @@ import { AuthService }   from '../services/auth.service';
   template: '',
 })
 
-export class ValidatingComponent implements OnInit {
+export class ValidatingComponent implements OnInit 
+{
 
-    constructor(private auth: AuthService,
-                private route: ActivatedRoute,
-                private router: Router){}
+  constructor(private auth: AuthService,
+              private route: ActivatedRoute,
+              private router: Router){}
 
   ngOnInit() {
     this.route.params
-    .switchMap((params: Params) => this.auth.validateUserAndLogin(params['token']))
-    .subscribe((res) => {
-      if (res) 
-        this.auth.setCookies(res, false)
-    });
+      .switchMap((params: Params) => this.auth.validateUserAndLogin(params['token']))
+      .subscribe((res) => {
+        if (res) 
+          this.auth.setCookies(res, false)
+      });
   }
 
 }

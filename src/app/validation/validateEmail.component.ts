@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+//----Angular Imports----//
+import { Component }                    from '@angular/core';
+import { Router }                       from '@angular/router';
 
-import { UsersService }   from '../services/users.service';
+//----Other Imports----//
+import { UsersService }                 from '../services/users.service';
 
 
 @Component({
@@ -11,15 +13,15 @@ import { UsersService }   from '../services/users.service';
   styleUrls: ['./validateEmail.component.css']
 })
 
-export class ValidateEmailComponent implements OnInit {
+export class ValidateEmailComponent
+{
 
-    constructor(private usersService: UsersService,
-                private router: Router){}
+  constructor(private usersService: UsersService,
+              private router: Router){}
 
-  ngOnInit() {
-    
-  }
-
+  /**
+   * Retrieve User Email
+   */
   get email(): string {
     if (this.usersService.currentUser 
         && this.usersService.currentUser.email) 
