@@ -1,6 +1,8 @@
+//----Angular Imports----//
 import { Component }    from '@angular/core';
 import { Router } from '@angular/router';
 
+//----Other Imports----//
 import { IRegisterUser }    from '../../interfaces';
 import { AuthService} from '../../services/auth.service';
 
@@ -11,25 +13,34 @@ import { AuthService} from '../../services/auth.service';
   styleUrls: ['./register.component.css']
 })
 
-export class RegisterComponent {
-  model: IRegisterUser = <any>{};
-  loginForm: boolean = true;
-  RegisterForm: boolean = false;
+export class RegisterComponent 
+{
 
   constructor(private router: Router,
-              private auth: AuthService) { }
+            private auth: AuthService) {}
+  
+  //----------Properties-----------//
 
+  /**
+   * Registering user's information
+   */
+  model: IRegisterUser = <any>{};
+
+  /**
+   * Gets emailIsAlreadyTaken from auth service
+   */
   get emailIsAlreadyTaken(): boolean {
     return this.auth.emailIsAlreadyTaken;
   }
 
-  switchForms() {
-    this.loginForm = false;
-    this.RegisterForm = true;
-  }
+  //-----------Methods------------//
 
-  register() {
-      this.auth.register(this.model)
+  /**
+   * Sends new user's information to auth service to be registered
+   */
+  register() 
+  {
+    this.auth.register(this.model)
   }
 
 }

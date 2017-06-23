@@ -16,14 +16,14 @@ import { UsersService }         from '../services/users.service';
 
 export class UserDashboardComponent implements OnInit
 {
+
+  constructor(private router: Router,
+              private auth: AuthService,
+              private usersService: UsersService) {}
+            
   firstName: string;
   userList: boolean = true;
   opusUser: string = document.cookie.split("Opus_User=")[1];
-
-  constructor(
-      private router: Router,
-      private auth: AuthService,
-      private usersService: UsersService) { }
 
   ngOnInit() {
     if(this.opusUser && this.opusUser.split('.').length === 3){

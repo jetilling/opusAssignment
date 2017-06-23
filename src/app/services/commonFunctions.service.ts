@@ -9,26 +9,30 @@ export class CommonFunctions {
   /**
    * Sets the JSON web token in the request header
    */
-  jwt() {
-       let opusUser = document.cookie.split("Opus_User=")[1];
-       if (opusUser && opusUser.split('.').length === 3) {
-           let headers = new Headers({ 'Authorization': opusUser});
-           return new RequestOptions({ headers: headers });
-       }
+  jwt() 
+  {
+    let opusUser = document.cookie.split("Opus_User=")[1];
+    if (opusUser && opusUser.split('.').length === 3) {
+        let headers = new Headers({ 'Authorization': opusUser});
+        return new RequestOptions({ headers: headers });
+    }
   }
 
   /**
    * Formats response from server
    */
-  extractData(res: Response) {
+  extractData(res: Response) 
+  {
     let body = res.json();
     return body || { };
   }
 
   /**
    * Error handling
+   * @param {Response | any} error - Error that was recieved
    */
-  handleError (error: Response | any) {
+  handleError (error: Response | any) 
+  {
     let errMsg: string;
     if (error instanceof Response) {
       const body = error.json() || '';
